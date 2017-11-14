@@ -1,0 +1,59 @@
+<div class="studentNavr" > 
+	<div class="container-fluid">
+ 	 <div class="row content">
+    <div class="col-sm-3 sidenav">
+        <div class="container">
+    <h4>Add Now Course <button style="float:none;" data-toggle="modal" data-target="#myModal"  data-ng-click="createCourse(index)"><i class="glyphicon glyphicon-plus"></i></button></h4>
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form>
+            <div class="modal-body">
+             <label>Course's name</label> <input type="text" data-ng-model="name"><br>
+             <label>Course's agenda</label> <input type="text" data-ng-model="agenda"><br>
+              <button data-ng-click="addNewCourse()">Add new Course</button>
+            </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="input-group">
+        <input   type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+      <div >
+      <ul class="nav nav-pills nav-stacked" data-ng-repeat="x in taglist | filter:search">
+       
+          <li ><a data-ng-click="getCoursesByTagCourse(x.id)" href="#section1">{{x.name}}</a><br></li>
+        
+      </ul>
+    </div>
+    </div>
+      <div   id= {{c.id}}   data-ng-click ="redirectInstructor(c.id)"  class="row-3" ng-repeat="c in courseByInstructor ">
+        <div class="col-sm-3">
+              <button  data-toggle="modal"   data-ng-click="register(user.id)"><i class="glyphicon glyphicon-plus"></i></button>    
+          <div class="well">
+            <h4>{{c.name}}</h4>
+             <h4>{{c.description}}</h4>
+              <h4>{{c.instructor.firstname}}</h4>
+          </div>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>
+ 
+ 
+ 
+

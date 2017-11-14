@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+</head>
+
+
+
+
+<body ng-app="myApp" ng-controller="myCtrl">
+<!-- <div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+ Indicators
+  <ol class="carousel-indicators" ng-repeat="y in pagearaay" >
+    <li data-target="#myCarousel" data-slide-to="{{$index}}"></li>
+  </ol>
+<div style="float: left;display:flex "  ng-repeat="x in records">
+<div  ng-repeat="y in x">
+<div class="w3-container">
+
+  <div class="w3-card-4" style="width:70%">
+    <header class="w3-container w3-light-grey">
+      <h3>{{x[$index].Name}}</h3>
+    </header>
+    <div class="w3-container">
+      <p>{{x[$index].City}}</p>
+      <i>{{x[$index].Country}}</i>
+      <hr>     
+      <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p><br>
+    </div>
+    <button class="w3-button w3-block w3-dark-grey">+ info</button>
+  </div>
+</div>
+</div>
+</div>
+</div>
+Left and right controls
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  </div> -->
+ <input type="file" name="file" id="filew" />
+ <button ng-click="aaa()">check</button>
+</body>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+$scope.records;
+  arre = [ {"Name":"1Alfreds Futterkiste","City":"Berlin","Country":"Germany"}, 
+	  {"Name":"2Ana Trujillo Emparedados y helados","City":"México D.F.","Country":"Mexico"}, 
+	  {"Name":"3Antonio Moreno Taquería","City":"México D.F.","Country":"Mexico"}, 
+	  {"Name":"11Around the Horn","City":"London","Country":"UK"}, {"22Name":"B's Beverages","City":"London","Country":"UK"}, 
+	  {"Name":"33Berglunds snabbköp","City":"Luleå","Country":"Sweden"}, {"111Name":"Blauer See Delikatessen","City":"Mannheim","Country":"Germany"}, 
+	  {"Name":"222Blondel père et fils","City":"Strasbourg","Country":"France"}, {"Name":"333Bólido Comidas preparadas","City":"Madrid","Country":"Spain"}, {"Name":"1111Bon app'","City":"Marseille","Country":"France"},
+	  {"Name":"2222Bottom-Dollar Marketse","City":"Tsawassen","Country":"Canada"}, {"Name":"3333Cactus Comidas para llevar","City":"Buenos Aires","Country":"Argentina"}, 
+	  {"Name":"11111Centro comercial Moctezuma","City":"México D.F.","Country":"Mexico"}, {"Name":"22222Chop-suey Chinese","City":"Bern","Country":"Switzerland"},
+	  {"Name":"33333Comércio Mineiro","City":"São Paulo","Country":"Brazil"},
+      {"Name":"33","City":"SPaulo","Country":"Brazil"},
+      {"Name":"44","City":"SPaulo","Country":"Brazil"},
+      {"Name":"55","City":"SPaulo","Country":"Brazil"}
+  ]
+  function chunk(arr, size) {
+  var newArr = [];
+  for (var i=0; i<arr.length; i+=size) {
+    newArr.push(arr.slice(i, i+size));  
+  }
+  return newArr;
+}
+var pagearaay=chunk(arre, 9);
+console.log(pagearaay[0]);
+for(var x in pagearaay){
+
+	$scope.records = chunk(pagearaay[x], 3);
+}
+
+$scope.aaa=function(){
+	var ad=document.getElementById("filew").value;
+	alert(ad);
+}
+
+});
+</script>
+</html>

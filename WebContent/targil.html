@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="windows-1255">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript">
+var itemxhr = new XMLHttpRequest();
+var replyxhr = new XMLHttpRequest();
+
+
+function func(){
+	for(var x=0;x<1000;x++){
+		
+		itemxhr.addEventListener('load', init);
+		itemxhr.open('POST','/coursemanagement/SPALoginServlet?user=admin&pass=admin');
+		itemxhr.send();
+	}
+	
+	
+	
+}
+function init() {
+	var res = itemxhr.responseText;
+	console.log(res);
+	
+}
+</script>
+<body >
+<form >
+First name: <input type="text" name="USER" ><br>
+Last name: <input type="text" name="PASS" ><br>
+<input type="button" onclick="func()" value="Submit">
+</form>
+
+</body>
+
+</html>

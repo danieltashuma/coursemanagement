@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+   <link   type="text/css"  href="course.css" rel="stylesheet">
+</head>
+	<body>
+	<div class="container-fluid">
+  	<div class="row content">  
+    <div class="col-sm-9 well">
+		      <div class="col-xs-3">
+		       {{course.name}}&nbsp;&nbsp;&nbsp;{{course.agenda}}
+		    	<h3>By:</h3>
+		    	<select class="form-control form-control-lg ">
+			  		<option>Instructor</option>
+				</select><br>
+				<h3>Attendents:</h3><select multiple class="form-control">
+		 			 <option>Students</option>
+				</select>
+				<h3>Location:</h3>
+		    	<select class="form-control form-control-lg ">
+			  		<option>location</option>
+				</select><br>
+				<h3>Course-Tag:</h3>
+		    	<select class="form-control form-control-lg ">
+			  		<option>coursetag</option>
+				</select><br>
+				<br>
+				<h3>Description:</h3>
+		          <textarea class="form-control" rows="3" placeholder="add Description"></textarea>
+			 		<h4>Schedule:</h4>
+			 		<b>Date:<input type="date"></b><br>
+		    	<b>Start:<input type="time"></b><br>
+				<b>End : <input type="time"></b>			 
+			  
+		
+   <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+ 
+	 </div>
+			
+		</div>
+		</div>
+  
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ 
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+ 
+<style type="text/css">
+
+
+body {
+	width: 100%;
+	font-size: 15px;
+}
+
+#logo {
+	style: position: fixed !important;
+}
+
+
+
+.title {
+	text-align: center;
+	font-weight: 200;
+	font-stretch: wider;
+}
+
+.avatar {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	z-index: -1;
+}
+
+.forgotpassword {
+	display: none;
+}
+
+#sidenav{
+				float:left;
+				width:20%;
+				 
+			}
+</style>
+</head>
+
+<body ng-app="myApp" >
+<div> 
+
+<nav class="navbar navbar-inverse">
+	  <div class="container-fluid ">
+	    <div class="navbar-header">
+	      <a class="navbar-brand "  href="#">WebSiteName</a>
+	      <div>
+	        <a href="#" class="glyphicon glyphicon-home"></a>
+	        <a href="#" class="glyphicon glyphicon-download"></a>
+	        <a href="#" class="glyphicon glyphicon-bell"></a>
+	        <a href="#" class="glyphicon glyphicon-envelope"></a>
+	       </div>
+   	 </div>
+	    <ul class="nav navbar-nav pull-right nav navbar-nav ">
+	      <li class="active " ><a href="#">{{student.firstname}}</a></li>
+	      <li><a href="#">
+	          <span class="logout" class="glyphicon glyphicon-log-out"></span>
+	        </a></li>
+	    </ul>
+  	</div>
+	</nav>
+
+</div>
+<div data-ng-view></div>
+<footer style=" background-color: #555;">
+  <p>Footer Text</p>
+</footer>
+</body>
+<script type="text/javascript">
+var courseId;
+var userId;
+var coursetagId;
+
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+	$routeProvider.when("/", {
+		templateUrl : "login.html",
+		controller : "loginCtrl"
+		
+
+	})
+	.when("/mainInstructor", {
+		templateUrl : "mainStudent.html",
+		controller : "instracturCtrl"
+
+	})
+	 
+	.when("/mainStudent", {
+		templateUrl : "mainStudent.html",
+		controller : "studentCtrl"
+			
+	})
+	
+	.when("/coursepage", {
+		templateUrl : "coursepage.html",
+		controller : "coursepage"
+
+	})
+
+	
+})
+app.controller("loginCtrl", function($scope, $http, $location) {
+	$http.post("http://localhost:8080/coursemanagement/SPALoginServlet?logout=logout")
+	.then(function(response) {
+		console.log(response.data);
+		
+	});
+	$scope.getuser = function() {
+		$http.get("http://localhost:8080/coursemanagement/rest/user/getUser?username="+$scope.username+"&password="+$scope.password)
+				.then(function(response) {
+					
+					console.log(response.data);
+					  userId=response.data.id;
+					  console.log(userId)
+				 	  if (response.data.type == "s") {
+				 		 $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?userid="+response.data.id)
+							.then(function(response) {
+								console.log(response.data);
+							});
+				 		   $location.path("/mainStudent");
+						 
+					 };  
+					 if (response.data.type == "i") {
+						 $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?userid="+response.data.id)
+							.then(function(response) {
+								console.log(response.data);
+							});
+						    $location.path("/mainInstructor");
+							 
+					 };  
+					 if (response.data.type == "m") {
+						 $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?userid="+response.data.id)
+							.then(function(response) {
+								console.log(response.data);
+							});
+						   $location.path("/mainManager");
+								 
+					 };  
+				});
+		$scope.forgotpassword = function (){
+			 $(".hidebtn").hide();
+			$(".forgotpassword").show();
+		};
+			$scope.send = function (){ 
+			$http.get("http://localhost:8080/coursemanagement/rest/user/forgotPassword?username="+$scope.username)
+			 .then(function(response) {
+			 
+				 
+			});
+		};
+		
+	};
+	});
+
+app.controller("studentCtrl", function($scope, $http, $location) {
+	$(".tagcourse").hide();
+	$(".studentCoursesdiv").hide();
+	$(".allavilableCourse").show();
+	$http.post("http://localhost:8080/coursemanagement/SPALoginServlet")
+	.then(function(response) {
+		$scope.userid=response.data;
+	   if($scope.userid=="failed"){
+	    	alert("login first");
+	    	  $location.path("/");
+	    }else{
+	$http.get("http://localhost:8080/coursemanagement/rest/course/getAvileableCourses")
+	.then(function(response) {
+		$scope.getAvileableCourses = response.data;
+		console.log($scope.getAvileableCourses);
+		
+		 courseId = response.data.id;
+		
+	});
+	    };
+		
+	});
+	$scope.showStudentsCourses = function (){
+	
+		$(".tagcourse").hide();
+		$(".studentCoursesdiv").show();
+		$(".allavilableCourse").hide();
+				$http.get("http://localhost:8080/coursemanagement/rest/Usercourse/getCoursesBytUserId?userId="+$scope.userid)
+				.then(function(response) {
+					$scope.Studentcourses = response.data;
+					console.log(response.data);
+		
+				});
+			};
+		
+		$scope.redirect = function (selectedcourse){
+			courseId = selectedcourse;
+			console.log(selectedcourse)
+			   $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?courseid="+selectedcourse)
+			.then(function(response) {
+				console.log(response.data);
+			});
+			 $location.path("/coursepage");
+		 };
+		$scope.getCoursesByTagCourse = function (selectedcourse){
+			coursetagId = selectedcourse;
+			
+			$http.get("http://localhost:8080/coursemanagement/rest/course/getCoursesByTagCourse?coursetagId="+coursetagId)
+			.then(function(response) {
+				$scope.tagcourse = response.data;
+				$(".tagcourse").show();
+				$(".studentCoursesdiv").hide();
+				$(".allavilableCourse").hide();
+				console.log(response.data);
+			});
+			
+		};
+	
+});
+		app.controller("coursepage", function($scope, $http, $location) {
+			$http.post("http://localhost:8080/coursemanagement/SPALoginServlet")
+			.then(function(response) {
+				$scope.userid=response.data;
+			   if($scope.userid=="failed"){
+			    	alert("login first");
+			    	  $location.path("/");
+			    }else{
+		    $(document).ready(function (){
+		        $("#GeneralClick").click(function (){
+		            $('html, body').animate({
+		                scrollTop: $("#General").offset().top
+		            }, 1000);
+		        });
+		        $("#MessageBoardClick").click(function (){
+		            $('html, body').animate({
+		                scrollTop: $("#MessageBoard").offset().top
+		            }, 1000);
+		        });
+		        $("#ScheduleClick").click(function (){
+		            $('html, body').animate({
+		                scrollTop: $("#Schedule").offset().top
+		            }, 1000);
+		        });
+		        $("#PresentationsClick").click(function (){
+		            $('html, body').animate({
+		                scrollTop: $("#Presentations").offset().top
+		            }, 1000);
+		        });
+		        $("#ResourcesClick").click(function (){
+		            $('html, body').animate({
+		                scrollTop: $("#Resources").offset().top
+		            }, 1000);
+		        });
+
+		    });
+		    $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?getcourseid")
+			.then(function(response) {
+				$scope.courseid=response.data;
+		
+			$http.get("http://localhost:8080/coursemanagement/rest/course/GetCourseById?courseId="+$scope.courseid)
+			.then(function(response) {
+				$scope.coursesInfo = response.data;
+				console.log(response.data);
+				
+				$http.get("http://localhost:8080/coursemanagement/rest/Coursetag/getCoursetagByCourseId?courseId="+$scope.courseid)
+				.then(function(response) {
+					$scope.taglist = response.data;
+				});
+				$http.get("http://localhost:8080/coursemanagement/rest/instructor/getInstructorByCourseId?courseId="+$scope.courseid)
+				.then(function(response) {
+					$scope.instructors = response.data;
+				});
+				
+				
+			});
+			});
+			    };
+				
+			});
+			$scope.register = function (){
+				$http.get("http://localhost:8080/coursemanagement/rest/Usercourse/createUsercourse?course="+$scope.courseid+"&user="+$scope.userid)
+				.then(function(response) {
+					var reply = response.data;
+					console.log(response.data);
+					 if (reply.id == 0){ 
+						 alert("register succedded");
+					 }else{
+						 alert("register faild");
+					 }
+					console.log(userId)
+				});
+				
+			};
+		
+	});
+ 		app.controller("instracturCtrl", function($scope, $http, $location) {
+ 			$(".tagcourse").hide();
+ 			$(".studentCoursesdiv").hide();
+ 			$(".allavilableCourse").show();
+			$http.post("http://localhost:8080/coursemanagement/SPALoginServlet")
+			.then(function(response) {
+				$scope.userid=response.data;
+			   if($scope.userid=="failed"){
+			    	alert("login first");
+			    	  $location.path("/");
+			    }else{
+			$http.get("http://localhost:8080/coursemanagement/rest/course/getAvileableCourses")
+			.then(function(response) {
+				$scope.getAvileableCourses = response.data;
+				console.log($scope.getAvileableCourses);			
+			});
+			$http.get("http://localhost:8080/coursemanagement/rest/Coursetag/getall")
+			.then(function(response) {
+				$scope.taglist = response.data;
+				console.log(response.data);
+			});
+		};
+		$scope.showStudentsCourses = function (){
+			
+			$(".tagcourse").hide();
+			$(".studentCoursesdiv").show();
+			$(".allavilableCourse").hide();
+					$http.get("http://localhost:8080/coursemanagement/rest/Usercourse/getCoursesBytUserId?userId="+$scope.userid)
+					.then(function(response) {
+						$scope.Studentcourses = response.data;
+						console.log(response.data);
+			
+					});
+					$http.get("http://localhost:8080/coursemanagement/rest/Coursetag/getCoursetagByCourseId?courseId="+$scope.courseid)
+					.then(function(response) {
+						$scope.taglist = response.data;
+					});
+				};
+			
+			$scope.redirect = function (selectedcourse){
+				courseId = selectedcourse;
+				console.log(selectedcourse)
+				   $http.post("http://localhost:8080/coursemanagement/SPALoginServlet?courseid="+selectedcourse)
+				.then(function(response) {
+					console.log(response.data);
+				});
+				 $location.path("/coursepage");
+			 };
+			$scope.getCoursesByTagCourse = function (selectedcourse){
+				coursetagId = selectedcourse;				
+				$http.get("http://localhost:8080/coursemanagement/rest/course/getCoursesByTagCourse?coursetagId="+coursetagId)
+				.then(function(response) {
+					$scope.tagcourse = response.data;
+					$(".tagcourse").show();
+					$(".studentCoursesdiv").hide();
+					$(".allavilableCourse").hide();
+					console.log(response.data);
+				});
+				
+			};
+		       });			
+		});
+ 
+</script>
+</html>

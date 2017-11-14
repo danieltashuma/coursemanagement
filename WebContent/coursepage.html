@@ -1,0 +1,68 @@
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+ 
+  ul.nav-pills {
+  
+  font-size:150%;
+      top: 100px;
+      position: fixed;
+      float: left !important;
+  }
+  div.col-sm-9 div {
+  margin-right:30%;
+  
+      font-size: 28px;
+  }
+  #General {color: #fff; }
+  #MessageBoard {color: #fff; background-color: #673ab7;}
+  #Schedule {color: #fff; background-color: #ff9800;}
+  #Presentations {color: #fff; background-color: #00bcd4;}
+  #Resources {color: #fff; background-color: #009688;}
+
+  </style>
+
+<div >
+
+    <nav style="float: left;" class="col-sm-3" id="myScrollspy">
+      <ul class="nav nav-pills nav-stacked">
+        <li ><a id="GeneralClick">General</a></li>
+        <li><a id="MessageBoardClick">Message Board</a></li>
+        <li><a id="ScheduleClick">Schedule</a></li>
+         <li><a id="PresentationsClick">Presentations</a></li>
+          <li><a id="ResourcesClick">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="col-sm-9">
+      <div id="General">    
+        <h1>course name :<b> {{coursesInfo.name}} </b></h1> 
+        <button ng-click="register()" style="float: right;">register</button>
+           <b>by : </b><i> {{coursesInfo.instructor.firstname}} {{coursesInfo.instructor.lastname}}</i> <b>class:</b> {{coursesInfo.location.name}}<br>
+           <b>agenda:</b>
+           <div> {{coursesInfo.agenda}}</div>
+           <b>description:</b>
+           <div> {{coursesInfo.description}}</div>
+      </div>
+      <div style="height: 550px;" id="MessageBoard"> 
+        <h1>Message Board</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>        
+       <div id="Schedule">         
+        <h1>Schedule</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>
+       <div id="Presentations">         
+        <h1>Presentations</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>
+       <div id="Resources">         
+        <h1>Resources</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>
+    </div>
+  </div>
+ 
