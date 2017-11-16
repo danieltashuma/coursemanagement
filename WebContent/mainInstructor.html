@@ -3,7 +3,7 @@
  	 <div class="row content">
     <div class="col-sm-3 sidenav">
         <div class="container">
-    <h4>Add Now Course <button style="float:none;" data-toggle="modal" data-target="#myModal"  data-ng-click="createCourse(index)"><i class="glyphicon glyphicon-plus"></i></button></h4>
+    <div class="instructorBtn"> <h4>Add New Course <button  data-toggle="modal" data-target="#myModal" class="instructorBtn"><i class="glyphicon glyphicon-plus instructorBtn"></i></button></h4></div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
@@ -14,7 +14,7 @@
             <div class="modal-body">
              <label>Course's name</label> <input type="text" data-ng-model="name"><br>
              <label>Course's agenda</label> <input type="text" data-ng-model="agenda"><br>
-              <button data-ng-click="addNewCourse()">Add new Course</button>
+              <button data-ng-click="addNewCourse(x.id)">Add new Course</button>
             </div>
             </form>
             <div class="modal-footer">
@@ -32,17 +32,21 @@
           </button>
         </span>
       </div>
-      <div >
+      <div>
+       <button data-ng-click="seeAllCourses()"  class="btn btn-info" role="button">All Courses</button>
+       <button data-ng-click="showUsersCourses()"  class="btn btn-info" role="button">My Courses</button>
       <ul class="nav nav-pills nav-stacked" data-ng-repeat="x in taglist | filter:search">
        
-          <li ><a data-ng-click="getCoursesByTagCourse(x.id)" href="#section1">{{x.name}}</a><br></li>
+          <li> <button  class="btn btn-info " role="button" data-ng-click="getCoursesByTagCourse(x.id)" >{{x.name}}</button></li>
         
       </ul>
     </div>
     </div>
-      <div   id= {{c.id}}   data-ng-click ="redirectInstructor(c.id)"  class="row-3" ng-repeat="c in courseByInstructor ">
+      <div     data-ng-click ="redirectInstructor(c.id)"  class="row-3 coursesbyins" data-ng-repeat="c in courseByInstructor ">
         <div class="col-sm-3">
-              <button  data-toggle="modal"   data-ng-click="register(user.id)"><i class="glyphicon glyphicon-plus"></i></button>    
+        <div class="instructorBtn" >
+            <button class="btn btn-danger btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn "></span></button> 
+ 				 <button class="btn btn-info btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
           <div class="well">
             <h4>{{c.name}}</h4>
              <h4>{{c.description}}</h4>
@@ -50,10 +54,61 @@
           </div>
         </div>
       </div>
+    
+      <div  class="allavilableCourse" id= {{allavilableCourse.id}}   data-ng-click ="redirect(allavilableCourse.id)"  class="row-3  allavilableCourse" ng-repeat="allavilableCourse in getAvileableCourses ">
+        <div class="col-sm-3">
+           <div class="instructorBtn">              <button class="btn btn-danger btn-lg instructorBtn " style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn " ></span></button> 
+ 				 <button class="btn btn-info btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
+ 				 
+                              <div class="well">
+            <h4>{{allavilableCourse.name}}</h4>
+             <h4>{{allavilableCourse.description}}</h4>
+              <h4>{{allavilableCourse.instructor.firstname}}</h4>
+          </div>
+        
+      </div>
+      
+      <div   class="row-3 getallcourses" ng-repeat="course in getallCourses">
+        <div class="col-sm-3">
+           <div class="instructorBtn"> 
+                   <button class="btn btn-danger btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn"></span></button> 
+ 				 <button class="btn btn-info btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
+          <div class="well">
+                <h2><b>course name: </b>{{course.name}}</h2>
+            <p>by : {{course.instructor.firstname}} <i></i></p>
+            <p>location :{{course.location.name}} </p>
+             <h4> description : {{course.description}}</h4>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tagcourse "  data-ng-click ="redirect(tag.id)"  data-ng-repeat="tag in tagcourse">
+             <div class="col-sm-3">
+                <div class="instructorBtn"> 
+              <button class="btn btn-danger btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn"></span></button> 
+ 				 <button class="btn btn-info btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
+       <div class="well">
+            <h2>{{tag.name}}</h2>
+             <b>by : <i>{{tag.instructor.firstname}} {{tag.instructor.lastname}}</i></b>
+             <h4>{{tag.agenda}}</h4>
+      </div>
+      </div>
+      </div> 
+        <div   id= "{{usercourse.id}}"   data-ng-click ="redirect(usercourse.id)"  class="row-3 usersCoursesdiv"  data-ng-repeat="usercourse in Userscourses ">
+        <div class="col-sm-3">
+           
+          <div class="well">
+            <h4>{{usercourse.name}}</h4>
+             <h4>{{usercourse.description}}</h4>
+              <h4>{{usercourse.instructor.firstname}}</h4>
+          </div>
+        </div>
+      </div>
+      
+      
+</div>
      </div>
   </div>
-</div>
  
  
- 
-
+ </div>

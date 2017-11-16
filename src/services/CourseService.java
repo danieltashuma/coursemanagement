@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import entity.Course;
-
+ 
 import manager.CourseFileManager;
 import manager.ManagerHelper;
 import webmy.Reply1;
@@ -26,20 +26,19 @@ public class CourseService {
 	
 	HttpServletRequest request;
 	
-
+	
 
 	@GET
-	@Path("getCourseByInstractorId")
-	public List<Course>  getCourseByInstractorId(@QueryParam("userId") int userId){
-		System.out.println("getCourseByInstractorId"+userId);
-		return (List)ManagerHelper.getCourseManager().getCourseByInstractorId(userId);
+	@Path(" getCourseByInstractorId")
+	public List<Course>  getCourseByInstractorId(@QueryParam("InstractorId") int InstractorId){
+		return ManagerHelper.getCourseManager().getCourseByInstractorId(InstractorId);
 	}
 	
 	@GET
-	@Path("GetCoursesByInstructorUserId")
+	@Path("GetCourseByInstructorUserId")
 	public List<Course>  GetCourseByInstructorUserId(@QueryParam("userId") int userId){
-		System.out.println("service"+userId);
-		return (List) ManagerHelper.getCourseManager().GetCourseByInstructorUserId(userId);
+		System.out.println("דקרהןבק"+userId);
+		return  ManagerHelper.getCourseManager().GetCourseByInstructorUserId(userId);
 	}
 	
 	@GET
@@ -56,31 +55,36 @@ public class CourseService {
 		return ManagerHelper.getCourseFileManager().getAll();
 	}
 	@GET
-	@Path("updateCourse")
-	public Reply1 updateCourse(@QueryParam("id") int id,@QueryParam("name") String name,@QueryParam("instructorid)")int instructorid,@QueryParam("coursetagid)")int coursetagid,
-			@QueryParam("starttime") String starttime,@QueryParam("endtime") String endtime,@QueryParam("agenda") String agenda,
-			@QueryParam("locationid") int locationid,@QueryParam("description") String description,boolean archive){
-		
-		return ManagerHelper.getCourseManager().updateCourse(id,name, instructorid, coursetagid, starttime, agenda, locationid, description,archive);
+	@Path("caretCourseByInstructor")
+	public Reply1 caretCourseByInstructor
+	        (@QueryParam("id") int id,
+			@QueryParam("instructor")int instructor,
+			@QueryParam("coursetag")int coursetag,
+			@QueryParam("starttime") String starttime,
+			@QueryParam("agenda") String agenda,
+			@QueryParam("location") int location,
+			@QueryParam("description") String description){
+		System.out.println(+instructor+"instrucot"+coursetag+"coursetag" +starttime+"starttime"+ agenda+"agenda"+location+"location"+description+"descroption"+"archive");
+		return ManagerHelper.getCourseManager().caretCourseByInstructor(id, instructor, coursetag, starttime, location, description);
 	}
 
 	@GET
 	@Path("deletecourse")
-	public Reply1 deletecourse(@QueryParam("courseid)")int courseid){		
-		return ManagerHelper.getCourseManager().deletecourse(courseid);
+	public Reply1 deletecourse(@QueryParam("courseId)")int courseId){		
+		return ManagerHelper.getCourseManager().deletecourse(courseId);
 	}
 	
 	@GET
 	@Path("createschedule")
-	public Reply1 createchedule(@QueryParam("courseid")int courseid,@QueryParam("date")String date,
+	public Reply1 createchedule(@QueryParam("courseId")int courseId,@QueryParam("date")String date,
 			@QueryParam("starttime")String starttime,@QueryParam("endtime")String endtime){	
 
-		return ManagerHelper.getCoursescheduleManager().createchedule(courseid, date,starttime,endtime);
+		return ManagerHelper.getCoursescheduleManager().createchedule(courseId, date,starttime,endtime);
 	}
 	@GET
 	@Path("deleteschedule")
-	public Reply1 deletechedule(@QueryParam("courseid")int courseid){	
-		return ManagerHelper.getCoursescheduleManager().deleteschedule(courseid);
+	public Reply1 deletechedule(@QueryParam("courseId")int courseId){	
+		return ManagerHelper.getCoursescheduleManager().deleteschedule(courseId);
 	}
 	@GET
 	@Path("getAvileableCourses")
@@ -90,9 +94,9 @@ public class CourseService {
 	}
 	@GET
 	@Path("uploadfile")
-	public Reply1 uploadfile(@QueryParam("fileaderrs") String fileaderrs,@QueryParam("courseid") int courseid) throws IOException, ServletException{
+	public Reply1 uploadfile(@QueryParam("fileaderrs") String fileaderrs,@QueryParam("courseId") int courseId) throws IOException, ServletException{
 		System.out.println("11filepath="+fileaderrs);
-		return ManagerHelper.getCourseManager().uploadfile(fileaderrs,courseid);
+		return ManagerHelper.getCourseManager().uploadfile(fileaderrs,courseId);
 	}
 	@GET
 	@Path("GetCourseById")
@@ -100,13 +104,21 @@ public class CourseService {
 		return (Course )ManagerHelper.getCourseManager().GetCourseById(courseId);
 	}
 	@GET
-	@Path("createNewCourse")
-	public Course createNewCourse(@QueryParam("name")String name,@QueryParam("agenda")String agenda){		
-		return (Course )ManagerHelper.getCourseManager().createNewCourse(name,agenda);
+	@Path("getCoursesByTagCourse")
+	public List<Course> getCoursesByTagCourse(@QueryParam("coursetagId")int coursetagId){		
+		return ManagerHelper.getCourseManager().getCoursesByTagCourse(coursetagId);
 	}
 	@GET
-	@Path("getCoursesByTagCourse")
-	public List<Course> getCoursesByTagCourse(@QueryParam("coursetagId")int coursetagId ){		
-		return (List )ManagerHelper.getCourseManager().getCoursesByTagCourse(coursetagId);
+	@Path("createNewCoursePartOne")
+	public Course createNewCoursePartOne(@QueryParam("name")String name,@QueryParam("agenda")String agenda) {
+		System.out.println(name+" "+agenda);
+		return  ManagerHelper.getCourseManager().createNewCoursePartOne(name,agenda);
 	}
+	@GET
+	@Path("getStudentsCourses")
+	public List<Course> getStudentsCourses(@QueryParam("userId")int userId) {
+		System.out.println(userId);
+		return (List)ManagerHelper.getCourseManager().getStudentsCourses(userId);
+	}
+	
 }

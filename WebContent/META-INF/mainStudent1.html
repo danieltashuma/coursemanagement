@@ -1,0 +1,62 @@
+<div class="studentNav" > 
+	<div class="container-fluid">
+ 	 <div class="row content">
+    <div class="col-sm-3 sidenav">
+      
+     <div class="input-group">
+        <input   type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+      <div >
+       
+        <button data-ng-click="showStudentsCourses()"  class="btn btn-info" role="button">My Courses</button>
+      <ul class="nav nav-pills nav-stacked" data-ng-repeat="x in taglist">
+       
+          <li ><button role="button" id = "{{x.id}}"  class="btn btn-info" data-ng-click="getCoursesByTagCourse(x.id)">{{x.name}}</button><br></li>
+        
+      </ul>
+   
+    </div>
+    </div>
+      <div  class="allavilableCourse" id= {{allavilableCourse.id}}   data-ng-click ="redirect(allavilableCourse.id)"  class="row-3  allavilableCourse" ng-repeat="allavilableCourse in getAvileableCourses ">
+        <div class="col-sm-3">
+              <button style="float:none;" data-toggle="modal"   data-ng-click="register(user.id)"><i class="glyphicon glyphicon-plus"></i></button>    
+          <div class="well">
+            <h4>{{allavilableCourse.name}}</h4>
+             <h4>{{allavilableCourse.description}}</h4>
+              <h4>{{allavilableCourse.instructor.firstname}}</h4>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+
+      
+      <div  style="display:none" class="studentCoursesdiv" id={{studentcourse.id}}   data-ng-click ="redirect(x.id)"  class="row-3" data-ng-repeat="studentcourse in Studentcourses ">
+        <div class="col-sm-3">
+           
+          <div class="well">
+            <h4>{{studentcourse.name}}</h4>
+             <h4>{{studentcourse.description}}</h4>
+              <h4>{{studentcourse.instructor.firstname}}</h4>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+ 
+ 
+      </div>
+      </div>
+       <div class="tagcourse" style="display:none ;" data-ng-repeat="tag in tagcourse">
+       <div class="well">
+            <h4>{{tag.name}}</h4>
+             <h4>{{tag.description}}</h4>
+              <h4>{{tag.instructor.firstname}}</h4>
+      </div>
+</div>

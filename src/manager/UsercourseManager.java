@@ -56,7 +56,7 @@ public class UsercourseManager {
 	public List<Usercourse> getCoursesBytUserId(int userId) {
 
 		System.out.println(userId);
-		String sql = " SELECT * FROM  usercourse uc" + " where user = " + userId;
+		String sql = " SELECT * FROM  usercourse uc  where user = " + userId;
 		System.out.println(sql);
 		return (List) entityManager.createNativeQuery(sql, Usercourse.class).getResultList();
 	}

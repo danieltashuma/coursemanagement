@@ -18,9 +18,7 @@ public class Course {
 	@Column(name = "instructor")
 	private Instructor instructor;
 	private String starttime;
-    
-	
-	
+
 	private String agenda;
 	@ManyToOne
 	@Column(name = "location")
@@ -28,9 +26,16 @@ public class Course {
 	private String description;
 	@ManyToOne
 	@Column(name = "coursetag")
-
 	private Coursetag coursetag;
+
 	private boolean archive;
+ 
+    private Massages massage;
+  	@ManyToOne
+	@Column(name = "schedule")
+     private Courseschedule schedule;
+	
+	
 
 	public Course() {
 
@@ -44,34 +49,53 @@ public class Course {
 
 	}
 
-	public Course(String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
-			Location location, String description, boolean archive) {
+	
 
-		this.name = name;
+	public Course(int id,Instructor instructor, Coursetag coursetag, String starttime,
+			Location location, String description) {
+		this.id = id;
 		this.instructor = instructor;
 		this.coursetag = coursetag;
 		this.starttime = starttime;
-
-		this.agenda = agenda;
 		this.location = location;
 		this.description = description;
-		this.archive = archive;
+	 
+	 
 
 	}
-
-	public Course(int id, String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
-			Location location, String description) {
+	
+	
+	public Course (int id, String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
+			Location location, String description,boolean archive){
 		this.id = id;
 		this.name = name;
 		this.instructor = instructor;
 		this.coursetag = coursetag;
 		this.starttime = starttime;
-
 		this.agenda = agenda;
 		this.location = location;
 		this.description = description;
+		this.archive=archive;
+	 
+		
+	}
+	public Course( String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
+			Location location, String description,boolean archive,Courseschedule schedule ) {
+		
+		this.name = name;
+		this.instructor = instructor;
+		this.coursetag = coursetag;
+		this.starttime = starttime;
+		this.agenda = agenda;
+		this.location = location;
+		this.description = description;
+		this.archive=archive;
+		this.schedule=schedule;
+		 
 
 	}
+
+	
 
 	public Coursetag getCoursetag() {
 		return coursetag;
@@ -145,4 +169,18 @@ public class Course {
 		this.archive = archive;
 	}
 
+	public Massages getMassage() {
+		return massage;
+	}
+
+	public void setMassage(Massages massage) {
+		this.massage = massage;
+	}
+	public Courseschedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Courseschedule schedule) {
+		this.schedule = schedule;
+	}
 }

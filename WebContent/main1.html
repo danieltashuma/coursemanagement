@@ -17,6 +17,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 
@@ -122,9 +123,9 @@ app.config(function($routeProvider) {
 
 	})
 	
-	.when("/addCourse", {
-		templateUrl : "addCourse.html",
-		controller : "addCourse"
+	.when("/createCuorse", {
+		templateUrl : "createCuorse.html",
+		controller : "createCuorse"
 
 	})
 })
@@ -171,6 +172,9 @@ app.controller("loginCtrl", function($scope, $http, $location) {
 	});
 
 app.controller("studentCtrl", function($scope, $http, $location) {
+	$(".tagcourse").hide();
+	$(".studentCoursesdiv").hide();
+	$(".allavilableCourse").show();
 	$http.get("http://localhost/coursemanagement/rest/course/getAvileableCourses")
 	.then(function(response) {
 		$scope.getAvileableCourses = response.data;
@@ -183,12 +187,14 @@ app.controller("studentCtrl", function($scope, $http, $location) {
 			console.log(response.data);
 		
 			$scope.showStudentsCourses = function (){
+				$(".tagcourse").hide();
+				$(".studentCoursesdiv").show();
+				$(".allavilableCourse").hide();
 				$http.get("http://localhost/coursemanagement/rest/course/getStudentsCourses?userId="+userId)
 				.then(function(response) {
 					$scope.Studentcourses = response.data;
 					console.log(response.data);
-					$(".studentCoursesdiv").show();
-					$(".allavilableCourse").hide();
+					
 				});
 			};
 		
@@ -254,49 +260,67 @@ app.controller("studentCtrl", function($scope, $http, $location) {
 				$scope.redirectInstructor = function (selectedcourse){
 					courseId = selectedcourse;
 					console.log(selectedcourse)
+					$(".getallcourses").hide();
+							$(".coursesbyins").show();
 					 $location.path("/scrolly");
 				};
 				
 				$scope.addNewCourse = function (){
-					$http.get("http://localhost/coursemanagement/rest/course/createNewCourse?name="
+					$http.get("http://localhost/coursemanagement/rest/course/createNewCoursePartOne?name="
 							+$scope.name+"&agenda="+$scope.agenda)
 					.then(function(response) {
 						$scope.creatCourse = response.data;
 						
 						console.log($scope.agenda);
 						console.log($scope.name);
-						 $location.path("/addCourse");
+						 $location.path("/createCuorse");
 					});
 					
 				};
+				  $scope.seeAllCourses = function (){
+						$http.get("http://localhost/coursemanagement/rest/course/getall")
+						.then(function(response) { 
+							$scope.getallCourses = response.date;
+							$(".getallcourses").show();
+							$(".coursesbyins").hide();
+							 
+						});
+						};
 			});
 		});
-		app.controller("addCourse", function($scope, $http, $location) {
-			
-			
-			$http.get("")
+		app.controller("createCuorse", function($scope, $http, $location) {
+			$scope.createCourseByinstructor = function (){ 
+				$http.get("http://localhost/coursemanagement/rest/course/caretCourseByInstructor?id="+courseId+
+						 "&instructor="+$scope.userId+
+						 "&coursetag="+$scope.coursetag+
+						 "&starttime="+scope.starttime+
+						 "&location="+$scope.location+
+	 					 "&description="+$scope.description)
+				.then(function(response) {
+					
+			  $http.get("http://localhost/coursemanagement/rest/user/getall")
 			.then(function(response) {
-				
-				
-				
-				$http.get("http://localhost/coursemanagement/rest/student/getall")
-				.then(function(response) {
-					$scope.Students =response.data;
-					
-				});
-				
-				$http.get("http://localhost/coursemanagement/rest/instructor/get")
-				.then(function(response) {
-					 
-					
-				});
-				
+				$scope.users = response.data;
+			});
+			$http.get("http://localhost/coursemanagement/rest/Coursetag/getall")
+			.then(function(response) {
+				$scope.taglist = response.data;
+				console.log(response.data);
+			});
+			
+			$http.get("http://localhost/coursemanagement/rest/location/get")
+			.then(function(response) {
+				$scope.location = response.data;
+				console.log(response.data);
 			});
 			
 			
 			
+				});
+		};
+			
 		});
-
+	 
  
 </script>
 </html>
