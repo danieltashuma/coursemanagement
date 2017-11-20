@@ -3,18 +3,6 @@
 	<persistence-unit 
 	    name="coursemanagement" 
 	    transaction-type="RESOURCE_LOCAL">
-		
-		
-		<class>entity.Instructor</class>
-		<class>entity.Student</class>
-		<class>entity.Course</class>
-		<class>entity.User</class>
-		<class>entity.Usercourse</class>
-		<class>entity.Coursetag</class>
-		<class>entity.Location</class>
-		<class>entity.CourseFile</class>
-		<class>entity.Courseschedule</class>
-		<class>entity.Massages</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/coursemanagement"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

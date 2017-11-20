@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Course {
@@ -18,58 +17,61 @@ public class Course {
 	@Column(name = "instructor")
 	private Instructor instructor;
 	private String starttime;
-    
-	
-	
-	private String agenda;
 	@ManyToOne
 	@Column(name = "location")
 	private Location location;
 	private String description;
 	@ManyToOne
 	@Column(name = "coursetag")
-
 	private Coursetag coursetag;
+
 	private boolean archive;
 
 	public Course() {
 
 	}
 
-	public Course(String name, String agenda) {
+	public Course(String name, String description) {
 
 		this.name = name;
-         this.agenda = agenda;
-      
+		this.description = description;
 
 	}
 
-	public Course(String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
-			Location location, String description, boolean archive) {
+	public Course(String name, Instructor instructor, String starttime, Location location, Coursetag coursetag,
+			String description,boolean archive) {
+
+		this.name = name;
+		this.instructor = instructor;
+		 this.starttime = starttime;
+        this.location = location;
+		this.coursetag = coursetag;
+		this.description = description;
+		this.archive=archive;
+
+	}
+	public Course(String name, Instructor instructor, Coursetag coursetag, String starttime,
+			String description) {
 
 		this.name = name;
 		this.instructor = instructor;
 		this.coursetag = coursetag;
 		this.starttime = starttime;
-
-		this.agenda = agenda;
-		this.location = location;
-		this.description = description;
-		this.archive = archive;
+        this.description = description;
+		
 
 	}
 
-	public Course(int id, String name, Instructor instructor, Coursetag coursetag, String starttime, String agenda,
-			Location location, String description) {
+	public Course(int id, String name, Instructor instructor, Coursetag coursetag, String starttime, Location location,
+			String description, boolean archive) {
 		this.id = id;
 		this.name = name;
 		this.instructor = instructor;
 		this.coursetag = coursetag;
 		this.starttime = starttime;
-
-		this.agenda = agenda;
-		this.location = location;
+        this.location = location;
 		this.description = description;
+		this.archive = archive;
 
 	}
 
@@ -113,13 +115,6 @@ public class Course {
 		this.starttime = starttime;
 	}
 
-	public String getAgenda() {
-		return agenda;
-	}
-
-	public void setAgenda(String agenda) {
-		this.agenda = agenda;
-	}
 
 	public Location getLocation() {
 		return location;
@@ -144,5 +139,6 @@ public class Course {
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}
+
 
 }

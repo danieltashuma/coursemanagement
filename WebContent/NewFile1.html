@@ -30,9 +30,6 @@
 body {
 	width: 100%;
 	font-size: 15px;
-	height: 100%;
-	background-color:
-	 
 }
 
 #logo {
@@ -56,21 +53,6 @@ body {
 	display: none;
 }
 
-<<<<<<< HEAD
-#sidenav{
-	float:left;
-	width:20%;
-				 
-}
-.footer {
-margin-top :0%;
- text-align: center;
- position: static;
- background-color : black;
- text-align: center;
-}
-
-=======
 .footer{
 margin-top : 30%;
 background-color: #555;
@@ -85,69 +67,39 @@ text-align: center;
 float: right;
 padding-top: 7%;
 }
->>>>>>> 6d1c9d00840eb2a0d244111a84730be7e7d0bb33
+.topbar {
+ width:100%;
+ hight:10%;
+ background-color: aqua;
+}
 </style>
 </head>
 <body data-ng-app="myApp">
-	<div class="topbar">
-
-<<<<<<< HEAD
-<body ng-app="myApp" >
-<div> 
-
-<nav  class="navbar navbar" style="background-image: url('img/Tech1-1-1024x563.jpg');">
-       <img >
-
-	  <div class="container-fluid "style="background-color: aqua;">
-	    <div class="navbar-header" >
-	      <a class="navbar-brand "  href="#">WebSiteName</a>
-	      <div>
-	      
-	        <a href="#" class="glyphicon glyphicon-home"></a>
-	        <a href="#" class="glyphicon glyphicon-download"></a>
-	        <a href="#" class="glyphicon glyphicon-bell"></a>
-	        <a href="#" class="glyphicon glyphicon-envelope"></a>
-	 </div>
-	  </div>
-	  
-	    <ul class="nav navbar-nav pull-right nav navbar-nav ">
-	      <li class="active " ><a href="#">{{student.firstname}}</a></li>
-	      <li><a href="#">
-	          <span class="logout" class="glyphicon glyphicon-log-out"></span>
-	        </a></li>
-	    </ul>
-	   
-  	</div> <div data-ng-view></div>
-	</nav>
-
-
-</div>
-<div class="footer">Footer Text</div>
-
-<script type="text/javascript" src="course.js">
-
-=======
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid ">
-				<div class="navbar-header">
-					<a class="navbar-brand " style="color: white;">welcome {{us}} <!-- {{usertype.firstname}} {{usertype.lastname}} -->!</a>
-					<div class="barbutton">
-						<a   href="#!homepahe" class="glyphicon glyphicon-home"></a> <a
+	  <div class="menu">
+    <div class="container-fluid">
+		<div class="navbar-header">
+			<a href="#">Bootsnipp</a>
+				<a   href="#!homepahe" class="glyphicon glyphicon-home"></a> <a
 							class="glyphicon glyphicon-download"></a> <a 
 							class="glyphicon glyphicon-bell"></a> <a 
 							class="glyphicon glyphicon-envelope"></a>
-								<button data-ng-click="allArchivedCourses()" class="glyphicon glyphicon-transfer"></button>
-					</div>
-				
-					
-				</div>
-				<ul class="nav navbar-nav pull-right nav navbar-nav ">
-					<li><a href="#"> <span class="logout glyphicon glyphicon-log-out"></span>							
-					</a></li>
-				</ul>
-			</div>
-		</nav>
+							<a data-ng-click="allArchivedCourses()" class="glyphicon glyphicon-transfer"></a>
+					 
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" ><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
 	</div>
+</div>
+	  
+					
+					
+					
+	 
+	  
 	<div data-ng-view></div>
 	<footer class="footer"  >
 		Footer Text
@@ -482,8 +434,5 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 		
 	});
  		
->>>>>>> 6d1c9d00840eb2a0d244111a84730be7e7d0bb33
 </script>
-
-</body>
 </html>

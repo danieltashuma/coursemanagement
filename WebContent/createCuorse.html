@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,42 +12,55 @@
    <link   type="text/css" rel="stylesheet">
 </head>
 	<body>
+=======
+ 
+	 <div> 
+>>>>>>> 6d1c9d00840eb2a0d244111a84730be7e7d0bb33
 	<div class="container-fluid">
   	<div class="row content">  
     <div class="col-sm-9 well">
 		      <div class="col-xs-3">
+		      <form>
 		       {{course.name}}&nbsp;&nbsp;&nbsp;{{course.agenda}}
 		    	<h3>By:</h3>
-		    	<select class="form-control form-control-lg ">
-			  		<option>Instructor</option>
-				</select><br>
-				<h3>Attendents:</h3><select multiple class="form-control">
-		 			 <option>Students</option>
-				</select>
+		    	
+				<h4>Starttime:</h4>
+			 		<b>Date:<input data-ng-model="starttime" type="text"></b><br>
 				<h3>Location:</h3>
-		    	<select class="form-control form-control-lg ">
-			  		<option>location</option>
+		    	<select data-ng-model="location" class="form-control form-control-lg ">
+			  		<option data-ng-repeat=" location in locations" id="{{location.id}}">{{location.name}}</option>
 				</select><br>
-				<h3>Course-Tag:</h3>
-		    	<select class="form-control form-control-lg ">
-			  		<option>coursetag</option>
+				<h3>Choose Course-Tag:</h3>
+		    	<select ng-model="coursetag" class="form-control form-control-lg ">
+			  		<option ng-repeat="tag in taglist" id={{tag.id}}>{{tag.name}}</option>
 				</select><br>
 				<br>
 				<h3>Description:</h3>
-		          <textarea class="form-control" rows="3" placeholder="add Description"></textarea>
-			 		<h4>Schedule:</h4>
-			 		<b>Date:<input type="date"></b><br>
-		    	<b>Start:<input type="time"></b><br>
-				<b>End : <input type="time"></b>			 
+		          <textarea  data-ng-model=" description"class="form-control" rows="3" placeholder="add Description"></textarea>
+			 		 
+		   			 
 			  
 		
-   <button type="submit" class="btn btn-success">Submit</button>
+   <button type="submit" class="btn btn-success" data-ng-click="createCourseByinstructor()">Submit</button>
+   <h3>Attendents:</h3>
+				<select data-ng-model="users" multiple class="form-control">
+		 			 <option id="{{attendent.id}}" data-ng-repeat=" attendent in users" ></option>
+				</select>
+    </form>
   </div>
  
 	 </div>
 			
 		</div>
 		</div>
-  
-</body>
-</html>
+ </div>
+ 
+<div> 
+
+
+ 
+     
+ 
+  </div>
+
+ 

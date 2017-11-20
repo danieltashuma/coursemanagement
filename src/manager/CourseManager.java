@@ -12,11 +12,11 @@ import javax.persistence.EntityManager;
 import org.apache.openjpa.persistence.EntityManagerImpl;
 
 import entity.Course;
+
 import entity.Coursetag;
 import entity.Instructor;
 import entity.Location;
 
-import entity.User;
 import webmy.InputStreamToFile;
 import webmy.Reply1;
 
@@ -53,71 +53,65 @@ public class CourseManager {
 	}
 
 	public List<Course> getAll() {
-		String sql = "SELECT * FROM coursemanagement.course; ";
+		String sql = "SELECT * FROM coursemanagement.course where course.archive = '1' ";
 
 		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
 
 	}
-	public List<Course> getAvileableCourses (){
-		String sql = " SELECT * FROM coursemanagement.course where starttime > current_date()  ";
-		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList(); 
+
+	public List<Course> getAvileableCourses() {
+		String sql = " SELECT * FROM coursemanagement.course where starttime > current_date() and archive = '1'  ";
+		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
 	}
- 
 
+	public List<Course> getCourseByInstractorId(int instractorId) {
+		String sql = "SELECT * FROM coursemanagement.course c where c.instructor = " + instractorId;
 
-	public List<Course> getCourseByInstractorId(int userId) {
-		String sql = "SELECT * FROM coursemanagement.course c where c.instructor =" + userId;
-		System.out.println("manager"+userId);
 		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
 	}
 
 	public List<Course> GetCourseByInstructorUserId(int userId) {
 
-		String str = "SELECT * FROM coursemanagement.course c "
-				+ " inner join instructor i on i.id=c.instructor"
-				+ " inner join user u on u.id=i.user  where u.id=" + userId;
-System.out.println("manager"+" "+str);
+		String str = "SELECT * FROM coursemanagement.course c inner join instructor i on i.id=c.instructor"
+				+ " inner join user u on u.id=i.user  where c.archive = '1' and  u.id=" + userId;
+		System.out.println("manager" + str);
 		return (List) entityManager.createNativeQuery(str, Course.class).getResultList();
 	}
 
-	public List<Course> getCoursesByTagCourse(int coursetagId) {
-
-		System.out.println(coursetagId);
-		String sql = "SELECT * FROM coursemanagement.coursetag where id =" + coursetagId;
-		System.out.println(sql);
-		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
-
+	public Course createCourseByinstroctor(String name, int instructor,String starttime, int location, int coursetag,
+			String description,boolean archive) {
+		
+		Location lo = ManagerHelper.getLocationManager().get(location);
+		Instructor i = ManagerHelper.getInstructorManager().get(instructor);
+		Coursetag ct = ManagerHelper.getCoursetagManager().get(coursetag);
+		Course course = new Course(name, i,starttime, lo,ct, description,archive);
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.persist(course);
+			
+			entityManager.getTransaction().commit();
+			System.out.println(course);
+			return course;
+		} catch (Exception e) {
+		
+			return null;
+		}
 	}
 
-	public Reply1 updateCourse(int id,String name, int instructorid, int coursetagid, String starttime,
-			String agenda, int locationid, String description,boolean archive) {
-		 try {
+
+	public Course createNewCoursePartOne(String name, String description) {
 		entityManager.getTransaction().begin();
-		Location location = ManagerHelper.getLocationManager().get(locationid);
-		Instructor instructor = ManagerHelper.getInstructorManager().get(instructorid);
-		Coursetag coursetag = ManagerHelper.getCoursetagManager().get(coursetagid);
-		Course course = new Course(name, instructor, coursetag, starttime, agenda, location, description,archive);
-		entityManager.merge(course);
-		entityManager.getTransaction().commit();
-		return new Reply1();
-	} catch (Exception e) {
-		 Reply1 r = new Reply1 ();
-		 r.setId(-1);
-		 r.setMsg(e.getMessage());
-		return r;
-	}		
-	}
-	public Course createNewCourse(String name,String agenda) {
-		entityManager.getTransaction().begin();
-		Course course = new Course(name, agenda);
+		Course course = new Course(name, description);
 		entityManager.persist(course);
+		System.out.println(name + " " + description);
 		entityManager.getTransaction().commit();
 		return course;
 	}
 
-	public Reply1 deletecourse(int courseid) {
+	public Reply1 deletecourse(int courseId) {
 		try {
-			Course course = ManagerHelper.getCourseManager().get(courseid);
+			Course course = get(courseId);
+			System.out.println(courseId);
 			entityManager.getTransaction().begin();
 			entityManager.remove(course);
 			entityManager.getTransaction().commit();
@@ -137,31 +131,32 @@ System.out.println("manager"+" "+str);
 		return (Course) entityManager.createNativeQuery(str, Course.class).getSingleResult();
 	}
 
-	public Reply1 uploadfile(String  fileNameAndpath,int courseid) {
+	public Reply1 uploadfile(String fileNameAndpath, int courseId) {
 
 		try {
-			entityManager.getTransaction().begin();			
-			String []fileAndName=InputStreamToFile.getFileName(fileNameAndpath);
-			String filepath =fileAndName[0];
-			String filename =fileAndName[1];
-			ManagerHelper.getCourseFileManager().createFileToCourse(courseid, filename);
-			Course course=ManagerHelper.getCourseManager().get(courseid);
-			String foldername=course.getName();
+			entityManager.getTransaction().begin();
+			String[] fileAndName = InputStreamToFile.getFileName(fileNameAndpath);
+			String filepath = fileAndName[0];
+			String filename = fileAndName[1];
+			ManagerHelper.getCourseFileManager().createFileToCourse(courseId, filename);
+			Course course = ManagerHelper.getCourseManager().get(courseId);
+			String foldername = course.getName();
 			System.out.println("before folder");
-			System.out.println("folder name="+foldername);
+			System.out.println("folder name=" + foldername);
 			InputStreamToFile.checkfolder(foldername);
 			InputStream is = new FileInputStream(filepath);
 			System.out.println("after folder");
-			System.out.println("is="+filepath);
-			OutputStream os = new FileOutputStream("C:/Users/user/web2/coursemanagement/WebContent/updatefile/"+foldername+"/"+ filename);
-         	byte[] buffer = new byte[1024];
+			System.out.println("is=" + filepath);
+			OutputStream os = new FileOutputStream(
+					"C:/Users/user/web2/coursemanagement/WebContent/updatefile/" + foldername + "/" + filename);
+			byte[] buffer = new byte[1024];
 			int bytesRead;
 			// read from is to buffer
 			while ((bytesRead = is.read(buffer)) != -1) {
 				os.write(buffer, 0, bytesRead);
 			}
 			is.close();
-			
+
 			os.flush();
 			os.close();
 			entityManager.getTransaction().commit();
@@ -175,17 +170,19 @@ System.out.println("manager"+" "+str);
 			return r;
 		}
 	}
-	
-	public Reply1  makeCourseArchive (int courseId,boolean archive ) {
-		try{			
-		entityManager.getTransaction().begin();
-		System.out.println(courseId);
-		System.out.println(archive);
-		Course course=ManagerHelper.getCourseManager().get(courseId);
-		course.setArchive(archive);
-		entityManager.merge(course);
-		entityManager.getTransaction().commit();
-		return new Reply1();
+
+	public Reply1 makeCourseArchive(int courseId, boolean archive) {
+		try {
+
+			entityManager.getTransaction().begin();
+			System.out.println(courseId);
+			System.out.println(archive);
+			Course course = get(courseId);
+			course.setArchive(archive);
+
+			entityManager.merge(course);
+			entityManager.getTransaction().commit();
+			return new Reply1();
 		} catch (Exception e) {
 			Reply1 r = new Reply1();
 			r.setId(-1);
@@ -195,4 +192,29 @@ System.out.println("manager"+" "+str);
 
 	}
 
+	public List<Course> getCoursesByTagCourse(int coursetagId) {
+
+		String sql = "SELECT * FROM coursemanagement.course c "
+				+ " inner join coursetag co on co.id=c.coursetag  where starttime > current_date() and archive = '1' and  c.coursetag = "
+				+ coursetagId;
+
+		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
+
+	}
+
+	public List<Course> getStudentsCourses(int userId) {
+		String sql = "SELECT * FROM coursemanagement.studentcourse  sc  inner join course c on  c.id = sc.course "
+				+ " inner join student s on s.id =  sc.student " + "inner join user u on u.id = s.user where u.id =  "
+				+ userId;
+		System.out.println(sql);
+		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
+
+	}
+	public List<Course> getAllArchiveCourses() {
+		String sql = "SELECT * FROM coursemanagement.course  c where c.archive = '0' ";
+		
+		return (List) entityManager.createNativeQuery(sql, Course.class).getResultList();
+
+	}
+	 
 }

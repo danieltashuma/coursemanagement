@@ -1,14 +1,14 @@
 <!-- <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
- 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script
@@ -23,65 +23,62 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
- 
-<style type="text/css">
 
+<style type="text/css">
 .header {
-width:100%;
-hight:10%;
+	width: 100%;
+	hight: 10%;
 }
 
-#sidenav{
-width:30%;
-hight:85%;
-
+#sidenav {
+	width: 30%;
+	hight: 85%;
 }
 
 .forgotpassword {
 	display: none;
 }
-footer{
- background-color: #555;
-  
- hight:5%;
-width:100%;
+
+footer {
+	background-color: #555;
+	hight: 5%;
+	width: 100%;
 }
- 
 </style>
 </head>
 
-<body data-ng-app="myApp" >
-<div> 
+<body data-ng-app="myApp">
+	<div>
 
-<nav class="navbar navbar-inverse header">
-	  <div class="container-fluid ">
-	    <div class="navbar-header">
-	      <a class="navbar-brand "  href="#">WebSiteName</a>
-	      <div>
-	        <a href="#" class="glyphicon glyphicon-home"></a>
-	        <a href="#" class="glyphicon glyphicon-download"></a>
-	        <a href="#" class="glyphicon glyphicon-bell"></a>
-	        <a href="#" class="glyphicon glyphicon-envelope"></a>
-	       </div>
-   	 </div>
-	    <ul class="nav navbar-nav pull-right nav navbar-nav ">
-	      <li class="active " ><a href="#">{{user.student.firstname}}</a></li>
-	      <li><a href="#">
-	          <span class="logout" class="glyphicon glyphicon-log-out"></span>
-	        </a></li>
-	    </ul>
-  	</div>
-	</nav>
-
-
+		<nav class="navbar navbar-inverse header">
+			<div class="container-fluid ">
+				<div class="navbar-header">
+					<a class="navbar-brand " href="#">WebSiteName</a>
+					<div>
+						<a href="#" class="glyphicon glyphicon-home"></a> <a href="#"
+							class="glyphicon glyphicon-download"></a> <a href="#"
+							class="glyphicon glyphicon-bell"></a> <a href="#"
+							class="glyphicon glyphicon-envelope"></a>
+					</div>
+				</div>
+				<ul class="nav navbar-nav pull-right nav navbar-nav ">
+					<li class="active "><a href="#">{{user.student.firstname}}</a></li>
+					<li><a href="#"> <span class="logout"
+							class="glyphicon glyphicon-log-out"></span>
+					</a></li>
+				</ul>
+			</div>
+		</nav>
 
 
 
-</div>
-<div data-ng-view></div>
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
+
+
+	</div>
+	<div data-ng-view></div>
+	<footer class="container-fluid">
+		<p>Footer Text</p>
+	</footer>
 </body>
 <script type="text/javascript">
 var courseId;
