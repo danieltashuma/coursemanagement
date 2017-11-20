@@ -12,9 +12,9 @@ import manager.ManagerHelper;
 @Path("/location")
 public class LocationService {
 	@GET
-	@Path("get")
+	@Path("getall")
 	public List<Location> getAll() {
-		return (List) ManagerHelper.getLocationManager().getAll();
+		return   ManagerHelper.getLocationManager().getAll();
 	}
 
 }

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
- 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,8 +37,6 @@
 
 
 <style type="text/css">
-
-
 body {
 	width: 100%;
 	font-size: 15px;
@@ -71,111 +73,129 @@ table {
   background-color: #efefef;
   text-align: center;
 }  */
-  .footer {
+.footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	color: grey;
 	text-align: center;
-} 
+}
 
 .forgotpassword {
 	display: none;
 }
+
 .title {
-    /* font-size: 250%; */
-    text-align: center;
+	/* font-size: 250%; */
+	text-align: center;
 }
- 
 </style>
 </head>
 
-<body ng-app="myApp" >
-<div class="mainbar" style="display: none;"> 
+<body ng-app="myApp">
+	<div class="mainbar" style="display: none;">
 
-<nav class="navbar navbar-inverse">
-	  <div class="container-fluid ">
-	    <div class="navbar-header">
-	      <a class="navbar-brand "  href="#">WebSiteName</a>
-	      <div >
-	        <a style="margin-left: 70px;" href="#" class="glyphicon glyphicon-home"></a>
-	        <a href="#" class="glyphicon glyphicon-download"></a>
-	        <a href="#" class="glyphicon glyphicon-bell"></a>
-	        <a href="#" class="glyphicon glyphicon-envelope"></a>
-	       </div>
-   	 </div>
-	    <ul class="nav navbar-nav pull-right nav navbar-nav ">
-	      <li class="active " ><a id="username"></a></li>
-	      <li><a href="#/">
-	          <span class="glyphicon glyphicon-log-out"></span>
-	        </a></li>
-	    </ul>
-  	</div>
-	</nav>
-	<div class="container-fluid">
- 	 <div class="row content">
-    <div class="col-sm-3 sidenav">
-	<div class="container">
-<h4>Add Now Course <button style="float:none;" data-toggle="modal" data-target="#myModal"  ng-click="createCourse"><i class="glyphicon glyphicon-plus"></i></button></h4>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-        <h2>Add course</h2>
-          <label>Course name</label><br>
-          <input><br>
-          <label>Agenda</label><br>
-          <input>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Blog..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-      </div>
-      <div>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Home</a></li>
-        <li><a href="#section2">Friends</a></li>
-        <li><a href="#section3">Family</a></li>
-        <li><a href="#section3">Photos</a></li>
-      </ul><br>
-    </div>
-    </div>
-      <div class="row-3" ng-repeat="course in getallCourses">
-        <div class="col-sm-3">
-                    <button  class="course" style="float: right;" ng-click="removeCourse"><i class="glyphicon glyphicon-trash"></i></button>
-                    <button  class="course" style="float: right;" ng-click="editCourse"><i class="glyphicon glyphicon-edit"></i></button>        
-          <div class="well">
-            <h2><b>course name: </b>{{course.name}}</h2>
-            <p>by : {{course.instructor.firstname}} <i></i></p>
-            <p>location :{{course.location.name}} </p>
-             <h4> description : {{course.description}}</h4>
-          </div>
-        </div>
-      </div>
-     
-  </div>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid ">
+				<div class="navbar-header">
+					<a class="navbar-brand " href="#">WebSiteName</a>
+					<div>
+						<a style="margin-left: 70px;" href="#"
+							class="glyphicon glyphicon-home"></a> <a href="#"
+							class="glyphicon glyphicon-download"></a> <a href="#"
+							class="glyphicon glyphicon-bell"></a> <a href="#"
+							class="glyphicon glyphicon-envelope"></a>
+					</div>
+				</div>
+				<ul class="nav navbar-nav pull-right nav navbar-nav ">
+					<li class="active "><a id="username"></a></li>
+					<li><a href="#/"> <span
+							class="glyphicon glyphicon-log-out"></span>
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container-fluid">
+			<div class="row content">
+				<div class="col-sm-3 sidenav">
+					<div class="container">
+						<h4>
+							Add Now Course
+							<button style="float: none;" data-toggle="modal"
+								data-target="#myModal" ng-click="createCourse">
+								<i class="glyphicon glyphicon-plus"></i>
+							</button>
+						</h4>
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog modal-sm">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+										<h2>Add course</h2>
+										<label>Course name</label><br> <input><br> <label>Agenda</label><br>
+										<input>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="Search Blog.."> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+					<div>
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="#section1">Home</a></li>
+							<li><a href="#section2">Friends</a></li>
+							<li><a href="#section3">Family</a></li>
+							<li><a href="#section3">Photos</a></li>
+						</ul>
+						<br>
+					</div>
+				</div>
+				<div class="row-3" ng-repeat="course in getallCourses">
+					<div class="col-sm-3">
+						<button class="course" style="float: right;"
+							ng-click="removeCourse">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
+						<button class="course" style="float: right;" ng-click="editCourse">
+							<i class="glyphicon glyphicon-edit"></i>
+						</button>
+						<div class="well">
+							<h2>
+								<b>course name: </b>{{course.name}}
+							</h2>
+							<p>
+								by : {{course.instructor.firstname}} <i></i>
+							</p>
+							<p>location :{{course.location.name}}</p>
+							<h4>description : {{course.description}}</h4>
+						</div>
+					</div>
+				</div>
 
-</div>
-</div>
-<div data-ng-view></div>
-<div  class="footer">
-  <p>Resize the browser window to see how the content respond to the resizing.</p>
-</div>
-<script type="text/javascript">
+			</div>
+
+		</div>
+	</div>
+	<div data-ng-view></div>
+	<div class="footer">
+		<p>Resize the browser window to see how the content respond to the
+			resizing.</p>
+	</div>
+	<script type="text/javascript">
 var app = angular.module("myApp", ["ngRoute"]);
 app.config(function($routeProvider) {
 var coursid;
@@ -207,20 +227,20 @@ var coursid;
 app.controller("loginCtrl", function($scope, $http, $location) {
 	$(".mainbar").hide();
 	
-	$http.post("http://localhost:8080/coursemanagement/SPALoginServlet?logout=logout")
+	$http.post("http://localhost/coursemanagement/SPALoginServlet?logout=logout")
 	.then(function(response) {
 		console.log(response.data);
 		
 	});
 
 	$scope.getuser = function() {
-		$http.get("http://localhost:8080/coursemanagement/rest/user/getUser?username="+$scope.username+"&password="+$scope.password)
+		$http.get("http://localhost/coursemanagement/rest/user/getUser?username="+$scope.username+"&password="+$scope.password)
 				.then(function(response) {
 					
 					console.log(response.data);
 					  
 				 	  if (response.data.type == "s") {
-							$http.post("http://localhost:8080/coursemanagement/SPALoginServlet?userid="+response.data.id)
+							$http.post("http://localhost/coursemanagement/SPALoginServlet?userid="+response.data.id)
 							.then(function(response) {
 								console.log(response.data);
 							});
@@ -285,9 +305,6 @@ app.controller("managerGrid", function($scope, $http) {
 	.then(function(response) {
 		$scope.getall = response.data;
 		console.log($scope.getall);
-		
-		
-  
 	});
 });
 app.controller("instracturGrid", function($scope, $http) {

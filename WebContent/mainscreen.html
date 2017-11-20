@@ -3,8 +3,9 @@
 <head>
 <meta charset="windows-1255">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -19,61 +20,69 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 </head>
 <body ng-app="main" ng-controller="mainpagecontrol">
 
-coursename=<input type="text" ng-model="coursename"  >
-syllabus=<textarea type="text" ng-model="syllabus" maxlength="500" rows="2" cols="70" ></textarea>
-schedule=<textarea type="text" ng-model="schedule" maxlength="500" rows="2" cols="70" ></textarea>
-<input type="button" ng-click="tester()" value="button">
+	coursename=
+	<input type="text" ng-model="coursename"> syllabus=
+	<textarea type="text" ng-model="syllabus" maxlength="500" rows="2"
+		cols="70"></textarea>
+	schedule=
+	<textarea type="text" ng-model="schedule" maxlength="500" rows="2"
+		cols="70"></textarea>
+	<input type="button" ng-click="tester()" value="button">
 
-<input type="button" ng-click="myproper()" value="schedule">
+	<input type="button" ng-click="myproper()" value="schedule">
 
-<h3>syll</h3>
-<div ng-repeat="x in cavani">
-<div class="w3-container">
-  <h2><i><b>day {{ $index + 1 }} :</b> </i></h2>
-  <div class="w3-card-4" style="width:70%">
-    <header class="w3-container w3-light-grey">
-      <h3>{{x}}</h3>
-    </header>
-    </div>
-</div>
+	<h3>syll</h3>
+	<div ng-repeat="x in cavani">
+		<div class="w3-container">
+			<h2>
+				<i><b>day {{ $index + 1 }} :</b> </i>
+			</h2>
+			<div class="w3-card-4" style="width: 70%">
+				<header class="w3-container w3-light-grey">
+					<h3>{{x}}</h3>
+				</header>
+			</div>
+		</div>
 
- <input type="button" value="sendfile" ng-click="wewe()"/>
-</div>
-<h3>dayss</h3>
- <ul ng-repeat="x in dawwni">
- <li><i><b>day {{ $index + 1 }} :</b> </i></li>
-<li>{{x}}</li>
+		<input type="button" value="sendfile" ng-click="wewe()" />
+	</div>
+	<h3>dayss</h3>
+	<ul ng-repeat="x in dawwni">
+		<li><i><b>day {{ $index + 1 }} :</b> </i></li>
+		<li>{{x}}</li>
 
-</ul>
-<br>
-<br>
+	</ul>
+	<br>
+	<br>
 
- <input type="file" name="file" id="file1" />
- 
-course : <select ng-model="courseid">
-<option ng-repeat="x in courserrr" value= "{{x.id}}">{{x.name}}
-</option>
-</select>
-   
-
-<button ng-click="coursefile()">create fil </button>
-
-<button ng-click="ceckpath1()" >ceckpath</button>
-<h2>course files</h2>
-<ul ng-repeat="x in filelist">
-<li>{{x.filename}}</li> 
-</ul>
+	<input type="file" name="file" id="file1" /> course :
+	<select ng-model="courseid">
+		<option ng-repeat="x in courserrr" value="{{x.id}}">{{x.name}}
+		</option>
+	</select>
 
 
-asd<iframe src="updatefile/w.pdf" style="height: 1000px;height: 400px;"> </iframe>
+	<button ng-click="coursefile()">create fil</button>
+
+	<button ng-click="ceckpath1()">ceckpath</button>
+	<h2>course files</h2>
+	<ul ng-repeat="x in filelist">
+		<li>{{x.filename}}</li>
+	</ul>
+
+
+	asd
+	<iframe src="updatefile/w.pdf" style="height: 1000px; height: 400px;">
+	</iframe>
 
 
 
-download= <a href="{{filepath}}" download>ddd</a>
+	download=
+	<a href="{{filepath}}" download>ddd</a>
 </body>
 <script>
 var app = angular.module("main", [ "ngRoute" ]);

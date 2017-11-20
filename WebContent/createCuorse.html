@@ -8,20 +8,20 @@
 		       {{course.name}}&nbsp;&nbsp;&nbsp;{{course.agenda}}
 		    	<h3>By:</h3>
 		    	
-				
+				<h4>Starttime:</h4>
+			 		<b>Date:<input data-ng-model="starttime" type="text"></b><br>
 				<h3>Location:</h3>
 		    	<select data-ng-model="location" class="form-control form-control-lg ">
 			  		<option data-ng-repeat=" location in locations" id="{{location.id}}">{{location.name}}</option>
 				</select><br>
-				<h3>Course-Tag:</h3>
-		    	<select ng-model="taglist" class="form-control form-control-lg ">
-			  		<option ng-repeat=" tag in coursetag" id={{tag.id}}>{{tag.name}}</option>
+				<h3>Choose Course-Tag:</h3>
+		    	<select ng-model="coursetag" class="form-control form-control-lg ">
+			  		<option ng-repeat="tag in taglist" id={{tag.id}}>{{tag.name}}</option>
 				</select><br>
 				<br>
 				<h3>Description:</h3>
 		          <textarea  data-ng-model=" description"class="form-control" rows="3" placeholder="add Description"></textarea>
-			 		<h4>Schedule:</h4>
-			 		<b>Date:<input data-ng-model="starttime" type="text"></b><br>
+			 		 
 		   			 
 			  
 		

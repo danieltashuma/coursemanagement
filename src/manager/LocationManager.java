@@ -44,7 +44,7 @@ public class LocationManager {
 		return entityManager.find(Location.class, id);
 	} 
 	
-	public List<Coursetag> getAll(){
+	public List<Location> getAll(){
 		String sql = "select * from location ";
 		
 		return  (List) entityManager.createNativeQuery(sql, Location.class).getResultList();

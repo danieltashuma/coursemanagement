@@ -56,8 +56,10 @@ public class UsercourseManager {
 	public List<Usercourse> getCoursesBytUserId(int userId) {
 
 		System.out.println(userId);
-		String sql = " SELECT * FROM  usercourse uc  where user = " + userId;
-		System.out.println(sql);
+		String sql = "  SELECT * FROM  usercourse uc"
+				+ " inner join course c  on c.id = uc.course "
+				+ "where c.archive = '1' and uc.user = " +userId;
+          System.out.println(sql);
 		return (List) entityManager.createNativeQuery(sql, Usercourse.class).getResultList();
 	}
 

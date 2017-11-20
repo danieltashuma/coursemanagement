@@ -29,7 +29,7 @@ public class CourseService {
 	
 
 	@GET
-	@Path(" getCourseByInstractorId")
+	@Path("getCourseByInstractorId")
 	public List<Course>  getCourseByInstractorId(@QueryParam("InstractorId") int InstractorId){
 		return ManagerHelper.getCourseManager().getCourseByInstractorId(InstractorId);
 	}
@@ -55,22 +55,23 @@ public class CourseService {
 		return ManagerHelper.getCourseFileManager().getAll();
 	}
 	@GET
-	@Path("caretCourseByInstructor")
-	public Reply1 caretCourseByInstructor
-	        (@QueryParam("id") int id,
-			@QueryParam("instructor")int instructor,
-			@QueryParam("coursetag")int coursetag,
+	@Path("createCourseByinstroctor")
+	public Course createCourseByinstroctor
+	        (@QueryParam("name")String  name,
+	        @QueryParam("instructor")int instructor,
 			@QueryParam("starttime") String starttime,
-			@QueryParam("agenda") String agenda,
-			@QueryParam("location") int location,
-			@QueryParam("description") String description){
-		System.out.println(+instructor+"instrucot"+coursetag+"coursetag" +starttime+"starttime"+ agenda+"agenda"+location+"location"+description+"descroption"+"archive");
-		return ManagerHelper.getCourseManager().caretCourseByInstructor(id, instructor, coursetag, starttime, location, description);
+		    @QueryParam("location") int location,
+		    @QueryParam("coursetag")int coursetag,
+			@QueryParam("description") String description,
+			@QueryParam("archive") boolean archive){
+		System.out.println(+instructor+"instrucot"+coursetag+"coursetag" +starttime+"starttime"+location+"location"+description+"descroption"+"archive");
+		return ManagerHelper.getCourseManager().createCourseByinstroctor(name, instructor, starttime, location, coursetag,description,archive);
 	}
+	
 
 	@GET
 	@Path("deletecourse")
-	public Reply1 deletecourse(@QueryParam("courseId)")int courseId){		
+	public Reply1 deletecourse(@QueryParam("courseId")int courseId){		
 		return ManagerHelper.getCourseManager().deletecourse(courseId);
 	}
 	
@@ -114,11 +115,19 @@ public class CourseService {
 		System.out.println(name+" "+agenda);
 		return  ManagerHelper.getCourseManager().createNewCoursePartOne(name,agenda);
 	}
+	 
 	@GET
-	@Path("getStudentsCourses")
-	public List<Course> getStudentsCourses(@QueryParam("userId")int userId) {
-		System.out.println(userId);
-		return (List)ManagerHelper.getCourseManager().getStudentsCourses(userId);
+	@Path("makeCourseArchive")
+	public  Reply1 makeCourseArchive(@QueryParam("courseId")int courseId,@QueryParam("archive")boolean archive) {
+	 
+		return  ManagerHelper.getCourseManager().makeCourseArchive(courseId,archive);
 	}
+	@GET
+	@Path("getAllArchiveCourses")
+	public  List<Course> getAllArchiveCourses() {
+	 
+		return  ManagerHelper.getCourseManager().getAllArchiveCourses();
+	}
+	
 	
 }
