@@ -72,8 +72,8 @@ public class CourseManager {
 
 	public List<Course> GetCourseByInstructorUserId(int userId) {
 
-		String str = "SELECT * FROM coursemanagement.course c " + " inner join instructor i on i.id=c.instructor"
-				+ " inner join user u on u.id=i.user  where u.id=" + userId;
+		String str = "SELECT * FROM coursemanagement.course c inner join instructor i on i.id=c.instructor"
+				+ " inner join user u on u.id=i.user  where c.archive = '1' and  u.id=" + userId;
 		System.out.println("manager" + str);
 		return (List) entityManager.createNativeQuery(str, Course.class).getResultList();
 	}
@@ -99,11 +99,11 @@ public class CourseManager {
 	}
 
 
-	public Course createNewCoursePartOne(String name, String agenda) {
+	public Course createNewCoursePartOne(String name, String description) {
 		entityManager.getTransaction().begin();
-		Course course = new Course(name, agenda);
+		Course course = new Course(name, description);
 		entityManager.persist(course);
-		System.out.println(name + " " + agenda);
+		System.out.println(name + " " + description);
 		entityManager.getTransaction().commit();
 		return course;
 	}
@@ -203,7 +203,7 @@ public class CourseManager {
 	}
 
 	public List<Course> getStudentsCourses(int userId) {
-		String sql = "SELECT * FROM coursemanagement.studentcourse  sc " + " inner join course c on  c.id = sc.course "
+		String sql = "SELECT * FROM coursemanagement.studentcourse  sc  inner join course c on  c.id = sc.course "
 				+ " inner join student s on s.id =  sc.student " + "inner join user u on u.id = s.user where u.id =  "
 				+ userId;
 		System.out.println(sql);

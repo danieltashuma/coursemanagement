@@ -78,9 +78,9 @@ public class CourseService {
 	@GET
 	@Path("createschedule")
 	public Reply1 createchedule(@QueryParam("courseId")int courseId,@QueryParam("date")String date,
-			@QueryParam("starttime")String starttime,@QueryParam("endtime")String endtime){	
+			@QueryParam("starttime")String starttime,@QueryParam("endtime")String endtime,@QueryParam("agenda")String agenda){	
 
-		return ManagerHelper.getCoursescheduleManager().createchedule(courseId, date,starttime,endtime);
+		return ManagerHelper.getCoursescheduleManager().createchedule(courseId, date,starttime,endtime,agenda);
 	}
 	@GET
 	@Path("deleteschedule")

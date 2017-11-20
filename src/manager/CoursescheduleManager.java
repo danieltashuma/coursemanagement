@@ -44,11 +44,11 @@ public class CoursescheduleManager {
 		return entityManager.find(Courseschedule.class, id);
 	}
 
-	public Reply1 createchedule(int courseid, String date,String starttime,String endtime) {
+	public Reply1 createchedule(int courseid, String date,String starttime,String endtime,String agenda) {
 		try {
 			entityManager.getTransaction().begin();
 			Course course = ManagerHelper.getCourseManager().get(courseid);
-			Courseschedule courseschedule = new Courseschedule(course, date,starttime, endtime);
+			Courseschedule courseschedule = new Courseschedule(course, date,starttime, endtime,agenda);
 			entityManager.persist(courseschedule);
 			entityManager.getTransaction().commit();
 			return new Reply1();
