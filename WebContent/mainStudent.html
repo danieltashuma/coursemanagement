@@ -20,19 +20,28 @@
    
     </div>
     </div>
-      <div  class="allavilableCourse" id= {{allavilableCourse.id}}   data-ng-click ="redirect(allavilableCourse.id)"  class="row-3  allavilableCourse" ng-repeat="allavilableCourse in getAvileableCourses ">
+       <div class="row">
+              <div class="row-4">
         <div class="col-sm-3">
-               
-          <div class="well"> 
- 
-         <button class="btn btn-danger btn-lg" style="float: right;"><span class="glyphicon glyphicon-trash"></span></button> <button class="btn btn-info btn-lg" style="float: right;"><span class="glyphicon glyphicon-pencil"></span></button>
+          <div class="well">
+           <div >
+     		 <div  class="allavilableCourse" id= {{allavilableCourse.id}}   data-ng-click ="redirect(allavilableCourse.id)"   ng-repeat="allavilableCourse in getAvileableCourses ">
+ 				 <button class="btn btn-danger btn-lg" style="float: right;"><span class="glyphicon glyphicon-trash"></span></button> <button class="btn btn-info btn-lg" style="float: right;"><span class="glyphicon glyphicon-pencil">		</span></button>
             <h2>{{allavilableCourse.name}}</h2>
             <b>by : <i>{{allavilableCourse.instructor.firstname}} {{allavilableCourse.instructor.lastname}}</i></b>
              <h4>{{allavilableCourse.agenda}}</h4>
+            <b><hr></b>
+          </div>
+           <br>
+              <br>
+              <br>       
+        </div>
           </div>
         </div>
       </div>
-  
+       </div>
+      </div>
+ 	 </div>
        <div   class="studentCoursesdiv"    data-ng-click ="redirect(studentcourse.course.id)"  class="row-3" data-ng-repeat="studentcourse in Studentcourses ">
         <div class="col-sm-3">
          <div class="well">
@@ -52,7 +61,3 @@
       </div>
 </div>
   </div>
-
-      </div>
-      </div>
-

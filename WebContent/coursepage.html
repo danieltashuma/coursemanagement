@@ -1,9 +1,4 @@
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
  
   ul.nav-pills {
@@ -18,7 +13,7 @@
   
       font-size: 28px;
   }
-  #General {color: #fff; }
+  #General {color: #fff;background-color: #454ab7; }
   #MessageBoard {color: #fff; background-color: #673ab7;}
   #Schedule {color: #fff; background-color: #ff9800;}
   #Presentations {color: #fff; background-color: #00bcd4;}
@@ -41,7 +36,8 @@
       <div id="General">    
         <h1>course name :<b> {{coursesInfo.name}} </b></h1> 
         <button ng-click="register()" style="float: right;">register</button>
-           <b>by : </b><i> {{coursesInfo.instructor.firstname}} {{coursesInfo.instructor.lastname}}</i> <b>class:</b> {{coursesInfo.location.name}}<br>
+           <b>by : </b><i> {{coursesInfo.instructor.firstname}} {{coursesInfo.instructor.lastname}}</i><br>
+            <b>class:</b> {{coursesInfo.location.name}}<br>
            <b>agenda:</b>
            <div> {{coursesInfo.agenda}}</div>
            <b>description:</b>
