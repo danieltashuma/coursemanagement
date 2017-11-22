@@ -1,1 +1,1 @@
-# coursemanagement
+# Organizational Course Management System 
