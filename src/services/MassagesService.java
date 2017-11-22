@@ -12,11 +12,12 @@ import webmy.Reply1;
 
 @Path("/Massages")
 public class MassagesService {
+	
 	@GET
-	@Path("getall")
-	public List<Massages> getall(){
-		
-		return ManagerHelper.getMassagesManager().getAll();
+	@Path("getMessagesByCourseId")
+	public List<Massages> getMessagesByCourseId(@QueryParam("course")int courseid){
+		System.out.println("inter message func, the corseid is ="+courseid);
+		return ManagerHelper.getMassagesManager().getMessagesByCourseId(courseid);
 	}
 	@GET
 	@Path("createMassages")

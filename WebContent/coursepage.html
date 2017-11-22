@@ -1,70 +1,103 @@
 
-<<<<<<< HEAD
-  <style>
- 
-  ul.nav-pills {
-  
-  font-size:150%;
-      top: 100px;
-      position: fixed;
-      float: left !important;
-  }
-  div.col-sm-9 div {
-  margin-right:30%;
-  
-      font-size: 28px;
-  }
-  #General {color: #fff;background-color: #454ab7; }
-  #MessageBoard {color: #fff; background-color: #673ab7;}
-  #Schedule {color: #fff; background-color: #ff9800;}
-  #Presentations {color: #fff; background-color: #00bcd4;}
-  #Resources {color: #fff; background-color: #009688;}
-=======
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+ 
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 250px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
 ul.nav-pills {
 	font-size: 150%;
 	top: 100px;
 	position: fixed;
 	float: left !important;
 }
->>>>>>> 6d1c9d00840eb2a0d244111a84730be7e7d0bb33
 
 div.col-sm-9 div {
 	margin-right: 30%;
 	font-size: 28px;
 }
 
-#General {
-	color: #fff;
+ #General {
+     border-style: solid;
+     border-color: coral;
 }
 
 #MessageBoard {
-	color: #fff;
-	background-color: #673ab7;
+    border-style: solid;
+    border-color: #1B9784;
+	 
 }
 
 #Schedule {
-	color: #fff;
-	background-color: #ff9800;
+    border-style: solid;
+     border-color: coral;
 }
 
 #Presentations {
-	color: #fff;
-	background-color: #00bcd4;
+
+	 border-style: solid;
+    border-color: #1B9784;
 }
 
 #Resources {
-	color: #fff;
-	background-color: #009688;
-}
+
+	 border-style: solid;
+    border-color: coral;
+}  
 </style>
 
 <div>
@@ -81,7 +114,7 @@ div.col-sm-9 div {
 	<div class="col-sm-9">
 		<div id="General">
 			<h1>
-				course name :<b> {{coursesInfo.name}} </b>
+							course name :<b> {{coursesInfo.name}} </b>
 			</h1>
 			<button ng-click="register()" style="float: right;">register</button>
 			<br> <b>by : </b><i> {{coursesInfo.instructor.firstname}}
@@ -91,22 +124,64 @@ div.col-sm-9 div {
 			<b>description:</b>
 			<div>{{coursesInfo.description}}</div>
 		</div>
-		<div style="height: 550px;" id="MessageBoard">
+		<div style="height: 1000px;" id="MessageBoard">
 			<h1>Message Board</h1>
-			<p>Try to scroll this section and look at the navigation list
-				while scrolling!</p>
-		</div>
-		<div id="Schedule">
+		<div class="container" style="width: 100%;height: 100%;">
+    <div class="row" style="width: 100%;height: 70%;">
+        <div class="col-md-5" style="width: 100%;height: 100%;">
+            <div class="panel panel-primary" style="width: 100%;height: 100%;">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                <div class="panel-body" style="width: 100%;height: 100%;">
+                    <ul class="chat" style="width: 100%;height: 100%;">
+                        <li class="left clearfix"><span class="chat-img pull-left">
+                      <!--       <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /> -->
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong  class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted"></small>
+                                        <span class="glyphicon glyphicon-time"></span>
+                                </div>
+                                <div ng-repeat="message in messages"> 
+                                <b>date : </b><br>
+                                <i>{{message.date}}</i><br>
+                                <b>message : </b><br>
+                                 <i>{{message.comment}}</i><br>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer" style="width: 100%;">
+                    <div class="input-group">
+                        <input ng-model="message" id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button ng-click="sendmessage()" class="btn btn-warning btn-sm" id="btn-chat">
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+		<div id="Schedule" style="height: 550px;" >  <button data-ng-clcik="createSchedule()" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-pencil"></span> Pencil 
+        </button>
+		  
 			<h1>Schedule</h1>
-			<p>Try to scroll this section and look at the navigation list
-				while scrolling!</p>
-		</div>
-		<div id="Presentations">
+			<div data-ng-repeat = "scheduel in Coursescheduels" > 
+			<p>Day   {{scheduel.date}}  {{scheduel.starttime}} - {{scheduel.endtime}} {{scheduel.agenda}}</p>
+			 
+			</div>
+			 
+			</div>
+		<div id="Presentations" style="height: 550px;">
 			<h1>Presentations</h1>
 			<p>Try to scroll this section and look at the navigation list
 				while scrolling!</p>
 		</div>
-		<div id="Resources">
+		<div id="Resources" style="height: 550px;">
 			<h1>Resources</h1>
 			<p>Try to scroll this section and look at the navigation list
 				while scrolling!</p>
@@ -114,45 +189,3 @@ div.col-sm-9 div {
 	</div>
 </div>
 
-<<<<<<< HEAD
-    <nav style="float: left;" class="col-sm-3" id="myScrollspy">
-      <ul class="nav nav-pills nav-stacked">
-        <li ><a id="GeneralClick">General</a></li>
-        <li><a id="MessageBoardClick">Message Board</a></li>
-        <li><a id="ScheduleClick">Schedule</a></li>
-         <li><a id="PresentationsClick">Presentations</a></li>
-          <li><a id="ResourcesClick">Resources</a></li>
-      </ul>
-    </nav>
-    <div class="col-sm-9">
-      <div id="General">    
-        <h1>course name :<b> {{coursesInfo.name}} </b></h1> 
-        <button ng-click="register()" style="float: right;">register</button>
-           <b>by : </b><i> {{coursesInfo.instructor.firstname}} {{coursesInfo.instructor.lastname}}</i><br>
-            <b>class:</b> {{coursesInfo.location.name}}<br>
-           <b>agenda:</b>
-           <div> {{coursesInfo.agenda}}</div>
-           <b>description:</b>
-           <div> {{coursesInfo.description}}</div>
-      </div>
-      <div style="height: 550px;" id="MessageBoard"> 
-        <h1>Message Board</h1>
-        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
-      </div>        
-       <div id="Schedule">         
-        <h1>Schedule</h1>
-        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
-      </div>
-       <div id="Presentations">         
-        <h1>Presentations</h1>
-        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
-      </div>
-       <div id="Resources">         
-        <h1>Resources</h1>
-        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
-      </div>
-    </div>
-  </div>
- 
-=======
->>>>>>> 6d1c9d00840eb2a0d244111a84730be7e7d0bb33

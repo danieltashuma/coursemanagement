@@ -8,7 +8,6 @@ import org.apache.openjpa.persistence.EntityManagerImpl;
 
 import entity.Course;
 
-import entity.Student;
 import entity.User;
 import entity.Usercourse;
 import webmy.Reply1;
@@ -78,14 +77,16 @@ public class UsercourseManager {
 		}
 	}
 
-	public Reply1 createUsercourse(int course, int user) {
-
+	public Reply1 createUsercourse(int user, int course) {
+  System.out.println("user"+user);
+  System.out.println("course"+course);
 		try {
 			entityManager.getTransaction().begin();
 			User s = ManagerHelper.getUserManager().get(user);
 			Course c = ManagerHelper.getCourseManager().get(course);
 			Usercourse usercourse = new Usercourse(s, c);			
 			entityManager.persist(usercourse);
+			System.out.println("user "+s+" "+"course"+c);
 			entityManager.getTransaction().commit();
 
 			return new Reply1();

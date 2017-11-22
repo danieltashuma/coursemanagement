@@ -47,9 +47,9 @@ public class MassagesManager {
 		return entityManager.find(Massages.class, id);
 	} 
 	
-	public List<Massages> getAll(){
-		String sql = "select * from massages ";
-		
+	public List<Massages> getMessagesByCourseId(int cousreid){
+		String sql = "select * from massages where course="+cousreid;
+		System.out.println(sql);
 		return  (List) entityManager.createNativeQuery(sql, Massages.class).getResultList();
 		
 	}

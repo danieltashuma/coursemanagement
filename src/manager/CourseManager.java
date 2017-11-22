@@ -82,7 +82,8 @@ public class CourseManager {
 			String description,boolean archive) {
 		
 		Location lo = ManagerHelper.getLocationManager().get(location);
-		Instructor i = ManagerHelper.getInstructorManager().get(instructor);
+		Instructor i = ManagerHelper.getInstructorManager().getInstructorByUserId(instructor);
+		System.out.println(i.getFirstname()+" "+i.getId());
 		Coursetag ct = ManagerHelper.getCoursetagManager().get(coursetag);
 		Course course = new Course(name, i,starttime, lo,ct, description,archive);
 		try {
@@ -97,7 +98,25 @@ public class CourseManager {
 			return null;
 		}
 	}
-
+	public Course updateCourseByinstroctor(int id,String name, int instructor,String starttime, int location, int coursetag,
+			String description,boolean archive) {
+		
+		Location lo = ManagerHelper.getLocationManager().get(location);
+		Instructor i = ManagerHelper.getInstructorManager().get(instructor);
+		Coursetag ct = ManagerHelper.getCoursetagManager().get(coursetag);
+	 
+		Course course = new Course(id,name, i,starttime, lo,ct, description,archive);
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.merge(course);
+			entityManager.getTransaction().commit();
+			System.out.println(course);
+			return course;
+		} catch (Exception e) {
+		
+			return null;
+		}
+	}
 
 	public Course createNewCoursePartOne(String name, String description) {
 		entityManager.getTransaction().begin();

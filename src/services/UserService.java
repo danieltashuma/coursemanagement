@@ -35,9 +35,6 @@ public class UserService {
 	public User getUser(@QueryParam("username") String username, @QueryParam("password") String password) {
 		System.out.println(" getUser");
 		return (User) ManagerHelper.getUserManager().getUser(username, password);
-		
-		 
-
 	}	 
 }
 

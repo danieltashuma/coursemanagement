@@ -37,9 +37,7 @@ public class ManagerHelper {
 	public static UserManager getUserManager() {
 		return new  UserManager(entityManagerFactory.createEntityManager());
 	}
-	public static UsercourseManager getStudentcourseManager() {
-		return new  UsercourseManager(entityManagerFactory.createEntityManager());
-	}
+	
 	public static LocationManager getLocationManager() {
 		return  new LocationManager(entityManagerFactory.createEntityManager());
 	}

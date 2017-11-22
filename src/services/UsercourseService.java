@@ -34,8 +34,9 @@ public class UsercourseService {
 	
 	@GET
 	@Path("createUsercourse")
-	public Reply1 createUsercourse(@QueryParam ("course") int course,@QueryParam ("user") int user) {		
-		return ManagerHelper.getUsercourseManager().createUsercourse(course, user);
+	public Reply1 createUsercourse(@QueryParam ("user") int user,@QueryParam ("course") int course) {	
+		System.out.println("user service "+user+" "+"course"+course);
+		return ManagerHelper.getUsercourseManager().createUsercourse(user,course);
 	}
 	
 }

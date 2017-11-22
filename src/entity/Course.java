@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Course {
 	@Id
@@ -50,15 +51,16 @@ public class Course {
 		this.archive=archive;
 
 	}
-	public Course(String name, Instructor instructor, Coursetag coursetag, String starttime,
-			String description) {
-
+	public Course(int id,String name, Instructor instructor, String starttime, Location location, Coursetag coursetag,
+			String description,boolean archive) {
+        this.id=id;
 		this.name = name;
 		this.instructor = instructor;
+		 this.starttime = starttime;
+        this.location = location;
 		this.coursetag = coursetag;
-		this.starttime = starttime;
-        this.description = description;
-		
+		this.description = description;
+		this.archive=archive;
 
 	}
 

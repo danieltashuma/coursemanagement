@@ -84,7 +84,15 @@ public class InstructorManager {
 		}
 	}
 
+	 public Instructor getInstructorByUserId(int userid){
+		 String sql = "SELECT i.id,i.firstname, i.lastname, i.email,i.phone,i.user "
+                 +" from instructor i "
+                 + " where i.user=  " +userid ; 
+			return  (Instructor) entityManager.createNativeQuery(sql, Instructor.class).getSingleResult();
+			
+	
 
+	}
 
 	 public Instructor getInstructorByCourseId(int courseId){
 			 String sql = "SELECT i.id,i.firstname, i.lastname, i.email,i.phone,i.user "

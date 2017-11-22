@@ -27,6 +27,10 @@
 
 
 <style type="text/css">
+body {
+	width: 100%;
+	font-size: 15px;
+}
 
 #logo {
 	style: position: fixed !important;
@@ -49,11 +53,12 @@
 	display: none;
 }
 
-/* .footer1{
-hight:5%;
-width:100%;
-background-color: black;
-} */
+.footer{
+margin-top : 30%;
+background-color: #555;
+text-align: center;
+  padding: 7px;
+}
 #sidenav {
 	float: left;
 	width: 20%;
@@ -64,7 +69,7 @@ padding-top: 7%;
 }
 </style>
 </head>
-<body data-ng-app="myApp"  data-ng-controller="myCtrl">
+<body data-ng-app="myApp">
 	<div class="topbar">
 
 		<nav class="navbar navbar-inverse">
@@ -72,11 +77,11 @@ padding-top: 7%;
 				<div class="navbar-header">
 					<a class="navbar-brand " style="color: white;">welcome {{us}} <!-- {{usertype.firstname}} {{usertype.lastname}} -->!</a>
 					<div class="barbutton">
-						<a   ng-click="home()" class="glyphicon glyphicon-home"></a> <a
+						<a   href="#!homepahe" class="glyphicon glyphicon-home"></a> <a
 							class="glyphicon glyphicon-download"></a> <a 
 							class="glyphicon glyphicon-bell"></a> <a 
 							class="glyphicon glyphicon-envelope"></a>
-								<a data-ng-click="allArchivedCourses()" class="glyphicon glyphicon-transfer"></a>
+								<button data-ng-click="allArchivedCourses()" class="glyphicon glyphicon-transfer"></button>
 					</div>
 				
 					
@@ -89,15 +94,14 @@ padding-top: 7%;
 		</nav>
 	</div>
 	<div data-ng-view></div>
-	<footer class="footer1"  >
-		  
+	<footer class="footer"  >
+		Footer Text
 	</footer>
 </body>
 <script type="text/javascript">
 var courseId;
 var userId;
 var coursetagId;
-var newCourse;
 var app = angular.module("myApp", ["ngRoute"]);
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
@@ -116,42 +120,14 @@ app.config(function($routeProvider) {
 		controller : "coursepage"
 
 	})
-	
+	.when("/homepahe", {
+		templateUrl : "maingrid.html",
+		controller : "maingridCtrl"
+
+	})
 
 	
 })
-
-
-app.controller("myCtrl", function($scope, $http, $location) { 
-	 $scope.allArchivedCourses = function (){
-		 alert("allArchivedCourses");
-		   $(".tagcoursediv").hide();
-			$(".MyCoursesdiv").hide();
-			$(".allavilableCourse").hide();
-		   $(".archivedCources").show();
-			$(".getallcourses").hide();
-		 
-		 $http.get("http://localhost/coursemanagement/rest/course/getAllArchiveCourses")
-			.then(function(response) {
-				$scope.archivedCources = response.data;
-				 console.log(response.data);
-			});
-		 
-		
-	 };
-	 $scope.unarchive = function (){
-		 $http.get("http://localhost/coursemanagement/rest/course/makeCourseArchive?courseId="
-					+courseId+"&archive=true").then(function(response) {
-			});
-	 };
-	 $scope.home = function (){
-		 alert("home click");
-		 $location.path("/maingrid");
-	 }
-	
-	 
-	
-});
 app.controller("loginCtrl", function($scope, $http, $location) {
 	$(".topbar").hide();
 	$(".footer").hide();
@@ -174,7 +150,15 @@ app.controller("loginCtrl", function($scope, $http, $location) {
 								$location.path("/maingrid");
 								 
 							});
-				 	
+				 		/* $http.get("http://localhost/coursemanagement/rest/student/getStudentByUserId?userid="+response.data.id)
+						 .then(function(response) {
+							 console.log(response.data)
+							
+							 $scope.usertype=response.data;
+							  $location.path("/maingrid");
+						});
+				 		  */
+						 
 					 };  
 					 if (response.data.type == "i") {
 						 $http.post("http://localhost/coursemanagement/SPALoginServlet?userid="+response.data.id)
@@ -213,9 +197,7 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 	$(".footer").show();
 	$(".tagcoursediv").hide();
 	$(".MyCoursesdiv").hide();
-	  $(".getallcourses").hide();
 	$(".allavilableCourse").show();
-	  $(".archivedCources").hide();
 	$http.post("http://localhost/coursemanagement/SPALoginServlet")
 	.then(function(response) {
 		$scope.userid=response.data;
@@ -232,21 +214,17 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 	});
 	$http.get("http://localhost/coursemanagement/rest/Coursetag/getall")
 	.then(function(response) {
-		$scope.taglist=response.data;
+		$scope.taglist = response.data;
 		console.log(response.data);
 	});
 	    };
 		
 	});
-
-	
 	$scope.showUesrCourses = function (){	
 		$(".tagcoursediv").hide();
 		$(".MyCoursesdiv").show();
 		$(".allavilableCourse").hide();
-		$(".getallcourses").hide();
-		  $(".archivedCources").hide();
-				$http.get("http://localhost/coursemanagement/rest/Usercourse/getCoursesBytUserId?userId="+userId)
+				$http.get("http://localhost/coursemanagement/rest/Usercourse/getCoursesBytUserId?userId="+$scope.userid)
 				.then(function(response) {
 					$scope.MyCoursesdiv = response.data;
 					console.log(response.data);
@@ -271,8 +249,6 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 				$(".tagcoursediv").show();
 				$(".MyCoursesdiv").hide();
 				$(".allavilableCourse").hide();
-				  $(".archivedCources").hide();
-					$(".getallcourses").hide();
 				console.log(response.data);
 			});
 			
@@ -284,7 +260,6 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 				$(".MyCoursesdiv").hide();
 				$(".allavilableCourse").hide();
 				$(".getallcourses").show();
-				  $(".archivedCources").hide();
 			 $http.get("http://localhost/coursemanagement/rest/course/getall")
 					.then(function(response) {
 						$scope.getallCourses = response.data;
@@ -299,17 +274,31 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 		.then(function(response) {
 			$scope.classlocation = response.data;
 			console.log(response.data);
-			
-			
 		});
 		 
+		 
+		 $scope.allArchivedCourses = function (){
+			 alert("allArchivedCourses");
+			   $(".tagcoursediv").hide();
+				$(".MyCoursesdiv").hide();
+				$(".allavilableCourse").hide();
+			   $(".archivedCources").show();
+			 
+			 $http.get("http://localhost/coursemanagement/rest/course/getAllArchiveCourses")
+				.then(function(response) {
+					$scope.archivedCources = response.data;
+					 console.log(response.data);
+				});
+				
+			 
+			 
+		 };
 		$scope.addNewCourse = function (){
 			$(".newCreatedCourse").show();
 			$(".tagcoursediv").hide();
 			$(".MyCoursesdiv").hide();
 			$(".allavilableCourse").hide();
 		   $(".archivedCources").hide();
-		   $(".getallcourses").hide();
 			
 			$http.get("http://localhost/coursemanagement/rest/Coursetag/getall")
 			.then(function(response) {
@@ -325,33 +314,20 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 					+"&coursetag="+$scope.coursetag
 					+"&description="+$scope.description)
 			 .then(function(response) {
-				 newCourse = response.data.id;
-				 console.log(newCourse)
-				 
+				// $scope.newCreatedCourse = response.data;
+				 $scope.newCreatedCourse.push({
+			     name:$scope.name,
+			     instructor:$scope.instructor,
+			     description:$scope.description,
+			     location:$scope.location
+					 
+					 
+				 });
 			});
 			
 			
+			
 		};
-
-
-		  $http.get("http://localhost/coursemanagement/rest/user/getall")
-			.then(function(response) {
-				$scope.users= response.data;
-				console.log($scope.users);
-				 
-			});
-		$scope.attendtsToCourse = function (){
-			alert("attendtsToCourse");
-			$http.get("http://localhost/coursemanagement/rest/Usercourse/createUsercourse?user="+$scope.user+"&course="+newCourse)
-			.then(function(response) {
-				console.log(newCourse)
-				$scope.attendents= response.data;
-				 
-				 
-			});
-		
-		};
-		
 		$scope.deleteCourse = function(courseId) {
 			
 			alert("are u sure u want to delete?");
@@ -368,24 +344,7 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 		};
 		  
 		
-		$scope.homepage = function (){
-			
-			$(".newCreatedCourse").hide();
-			$(".tagcoursediv").hide();
-			$(".MyCoursesdiv").hide();
-			$(".allavilableCourse").show();
-		   $(".archivedCources").hide();
-		   $(".archivedCources").hide();
-			$http.get("http://localhost/coursemanagement/rest/course/getAvileableCourses")
-			.then(function(response) {
-				$scope.getAvileableCourses = response.data;
-				 
-				
-				 courseId = response.data.id;		
-			});
-			
-			
-		};
+		
 		
 	
 });
@@ -432,14 +391,23 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 			$http.get("http://localhost/coursemanagement/rest/course/GetCourseById?courseId="+$scope.courseid)
 			.then(function(response) {
 				$scope.coursesInfo = response.data;
-				 
+				console.log(response.data);
 				
+				$http.get("http://localhost/coursemanagement/rest/Massages/getMessagesByCourseId?course="+$scope.courseid)
+				.then(function(response) {
+					$scope.messages = response.data;
+					console.log($scope.courseid);
+					console.log(response.data);
 				$http.get("http://localhost/coursemanagement/rest/Coursetag/getCoursetagByCourseId?courseId="+$scope.courseid)
 				.then(function(response) {
 					$scope.taglist = response.data;
 				});
+				$http.get("http://localhost/coursemanagement/rest/instructor/getInstructorByCourseId?courseId="+$scope.courseid)
+				.then(function(response) {
+					$scope.instructors = response.data;
+				});
 				
-				
+				});
 			});
 			});
 			    };
@@ -459,6 +427,9 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 				});
 				
 			};
+			
+			
+			
 			$scope.sendmessage = function (){
 				alert("qwe");
 			/* 	Date date = new date(); */
@@ -475,22 +446,7 @@ app.controller("maingridCtrl", function($scope, $http, $location) {
 				});
 				});
 			};
-			
-			
-			
-			$http.get("http://localhost/coursemanagement/rest/csescheduleService/getCourseScheduel?courseId="+courseId)
-			.then(function(response) {
-				$scope.Coursescheduels = response.data;
-				console.log($scope.Coursescheduels );
-				
-				
-			});
-			$scope.createSchedule = function (){
-				
-				
-				
-			};
-			
+		
 	});
  		
 </script>

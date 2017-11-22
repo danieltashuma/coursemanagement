@@ -42,7 +42,17 @@
                     </select>
 			 	   <button data-ng-click="addNewCourse()">Add new Course</button>
 			 	     </form>
-			 	     
+			 	    <br>
+				
+				<form >
+				  <h3>Attendents:</h3>
+				<select data-ng-model="user">
+		 			 <option value="{{x.id}}" data-ng-repeat="x in users" >{{x.id}}</option>
+				</select> 
+				
+			 
+				  <button  data-ng-click="attendtsToCourse()" class="btn btn-success">Attendents</button>
+			 	     </form>
             </div>
           
             <div class="modal-footer">
@@ -53,7 +63,7 @@
       </div>
     </div>
      <!--------------------------------------  side bar div     --------------------------------------------------->
-     <div class="input-group">
+     <div style="background-color: white" style="border-color:blue" class="input-group">
         <input   type="text" class="form-control" placeholder="Search Blog..">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button">
@@ -73,11 +83,13 @@
     </div>
     </div>
     <!--------------------------------------  MyCoursesdiv     --------------------------------------------------->
-      <div     class="row-3 coursesbyins MyCoursesdiv" data-ng-repeat="mycourse in MyCoursesdiv ">
+   
+      <div  style="background-color: white" style="border-color:blue"   class="row-3 coursesbyins MyCoursesdiv" data-ng-repeat="mycourse in MyCoursesdiv ">
         <div class="col-sm-3">
+         <label>MyCoursesdiv</label>
         <div class="instructorBtn" >
             <button data-ng-click="deleteCourse(mycourse.course.id)" class="btn btn-danger btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn"></span></button> 
- 				 <button class="btn btn-info btn-lg instructorBtn" style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
+ 				 <button class="btn btn-info btn-lg instructorBtn" data-ng-click ="redirectToCoursePage(mycourse.course.id)"style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
           <div class="well">
             <h2>{{mycourse.course.name}}</h2>
            <b> by : <i>{{mycourse.course.instructor.firstname}} {{mycourse.course.instructor.lastname}}</i></b><br>
@@ -89,8 +101,10 @@
         </div>
       </div>
     <!--------------------------------------  allavilableCoursediv      --------------------------------------------------->
-      <div  class="allavilableCourse"  class="row-3  allavilableCourse" data-ng-repeat="allavilableCourse in getAvileableCourses ">
+    
+      <div style="background-color: white" style="border-color:blue"   class="row-3  allavilableCourse" data-ng-repeat="allavilableCourse in getAvileableCourses ">
         <div class="col-sm-3">
+        <label>allavilableCourse</label>
            <div class="instructorBtn"><button class="btn btn-danger btn-lg  " style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn " ></span></button> 
  				 <button class="btn btn-info btn-lg " style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
  				  <div class="well">
@@ -103,9 +117,12 @@
           </div>
         <span class="glyphicons glyphicons-roundabout"></span>
       </div>
+      </div>
       <!--------------------------------------  getallCourses      --------------------------------------------------->
-      <div   class="row-3 getallcourses" data-ng-repeat="course in getallCourses">
+     
+      <div   style="background-color: white" style="border-color:blue" class="row-3 getallcourses" data-ng-repeat="course in getallCourses">
         <div class="col-sm-3">
+         <label>getallcourses</label>
            <div class="instructorBtn"> 
                    <button class="btn btn-danger btn-lg " style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn"></span></button> 
  				 <button class="btn btn-info btn-lg " style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
@@ -120,8 +137,10 @@
       </div>
         
       <!--------------------------------------  tagcoursediv      --------------------------------------------------->
-      <div class="tagcoursediv "    data-ng-repeat="tag in tagcourse">
+      
+      <div style="background-color: white" style="border-color:blue" class="tagcoursediv "    data-ng-repeat="tag in tagcourse">
              <div class="col-sm-3">
+             <label>tagcoursediv</label>
                 <div class="instructorBtn"> 
               <button class="btn btn-danger btn-lg " style="float: right;"><span class="glyphicon glyphicon-trash instructorBtn"></span></button> 
  				 <button class="btn btn-info btn-lg " style="float: right;"><span class="glyphicon glyphicon-pencil instructorBtn"></span></button></div>
@@ -134,9 +153,10 @@
       </div>
       </div> 
       <!--------------------------------------  usersCoursesdiv      --------------------------------------------------->
-        <div   id= "{{usercourse.id}}"  class="row-3 usersCoursesdiv"  data-ng-repeat="usercourse in Userscourses ">
+      
+        <div style="background-color: white" style="border-color:blue"   id= "{{usercourse.id}}"  class="row-3 usersCoursesdiv"  data-ng-repeat="usercourse in Userscourses ">
         <div class="col-sm-3">
-           
+           <label>usersCoursesdiv</label>
           <div class="well">
             <h4>{{usercourse.name}}</h4>
              <h4>{{usercourse.description}}</h4>
@@ -146,10 +166,11 @@
         </div>
       </div>
      
-        <!-------------------  usersCoursesdiv      -------------------------->
-      <div  id = "{{archived.id}}"  class="row-3 archivedCources" data-ng-repeat = "archived in archivedCources">         
+        <!-------------------  archivedCources      -------------------------->
+      
+      <div style="background-color: white" style="border-color:blue"  id = "{{archived.id}}"  class="row-3 archivedCources" data-ng-repeat = "archived in archivedCources">         
        <div class="col-sm-3">
-           
+             <label>archivedCources</label>
           <div class="well">
             <h4>{{archived.name}}</h4>
              <h4>{{archived.description}}</h4>
@@ -158,10 +179,11 @@
           </div>
         </div>
       </div>
-      <div   data-ng-repeat="newcourse in newCreatedCourse" id="{{newcourse.id}}" class=" row-3 newCreatedCourse">
+      <div  style="background-color: white" style="border-color:blue"  data-ng-repeat="newcourse in newCreatedCourse" id="{{newcourse.id}}" class=" row-3 newCreatedCourse">
       
         <div class="col-sm-3">
            
+           <button  ng-click ="unarchive()">button</button> 
           <div class="well">
        <h4>{{newcourse.name}}</h4>
         <h4>{{newcourse.instructor.firstname}}</h4>
@@ -171,7 +193,7 @@
       
       </div>
 </div>
-     </div>
+     
   </div>
  
  
